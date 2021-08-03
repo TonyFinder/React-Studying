@@ -1,15 +1,11 @@
 import React from 'react';
 import p from './Profile.module.css';
 import MyPosts from "./MyPosts/MyPosts";
+import ProfileInfo from './ProfileInfo/ProfileInfo';
 
 const Profile = () => {
     return <div>
-        <div>
-            <img src='https://cdn.pixabay.com/photo/2016/10/18/21/22/beach-1751455__480.jpg' alt='picture'/>
-        </div>
-        <div>
-            Ava + description
-        </div>
+        <ProfileInfo />
         <MyPosts/>
     </div>
 }
