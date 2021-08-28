@@ -10,7 +10,7 @@ const MyPosts = () => {
         likesNumber: number
     }
 
-    let postsData: postsDataProps[] = [
+    let posts: postsDataProps[] = [
         {id: 1, message: "How are you?", likesNumber: 15},
         {id: 2, message: "It is my first message!", likesNumber: 20},
 ]
@@ -24,8 +24,7 @@ const MyPosts = () => {
             <button>Add post</button>
         </div>
         <div className={p.posts}>
-            <Post message={postsData[0].message} likesNumber={postsData[0].likesNumber}/>
-            <Post message={postsData[1].message} likesNumber={postsData[1].likesNumber}/>
+            {posts.map(post => <Post message={post.message} likesNumber={post.likesNumber}/>)}
         </div>
     </div>
 }

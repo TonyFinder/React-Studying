@@ -29,7 +29,7 @@ const MessageItem: React.FC<MessageItemPropsType> = (props) => {
 
 const Dialogs = () => {
 
-    let dialogsData: DialogItemsPropsType[] = [
+    let dialogs: DialogItemsPropsType[] = [
         {id: 1, name: 'Dimych'},
         {id: 2, name: 'Andrey'},
         {id: 3, name: 'Sveta'},
@@ -43,7 +43,7 @@ const Dialogs = () => {
         message: string
     }
 
-    let messagesData: messagesDataProps[] = [
+    let messages: messagesDataProps[] = [
         {id: 1, message: 'Hi'},
         {id: 2, message: 'How is your it-kamasutra?'},
         {id: 3, message: 'Yo'},
@@ -54,12 +54,10 @@ const Dialogs = () => {
     return (
         <div className={d.allPageDialogs}>
             <div className={d.dialogs}>
-                <DialogItems name={dialogsData[0].name} id={dialogsData[0].id}/>
-                <DialogItems name={dialogsData[1].name} id={dialogsData[1].id}/>
+                {dialogs.map(dialog => <DialogItems name={dialog.name} id={dialog.id}/>)}
             </div>
             <div className={d.messages}>
-                <MessageItem message={messagesData[0].message}/>
-                <MessageItem message={messagesData[1].message}/>
+                {messages.map(messages => <MessageItem message={messages.message}/>)}
             </div>
         </div>
     )
