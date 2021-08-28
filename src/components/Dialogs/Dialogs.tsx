@@ -1,31 +1,7 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
 import d from './Dialogs.module.css';
-
-type DialogItemsPropsType = {
-    name: string
-    id: number
-}
-
-const DialogItems: React.FC<DialogItemsPropsType> = (props) => {
-    return (
-        <div className={`${d.dialogItem} ${d.active}`}>
-            <NavLink to={'/dialogs/' + props.id}>{props.name}</NavLink>
-        </div>
-    )
-}
-
-type MessageItemPropsType = {
-    message: string
-}
-
-const MessageItem: React.FC<MessageItemPropsType> = (props) => {
-    return (
-        <div className={d.messageItem}>
-            {props.message}
-        </div>
-    )
-}
+import {DialogItems, DialogItemsPropsType} from './DialogItems/DialogItems';
+import {Message} from './Message/Message';
 
 const Dialogs = () => {
 
@@ -57,7 +33,7 @@ const Dialogs = () => {
                 {dialogs.map(dialog => <DialogItems name={dialog.name} id={dialog.id}/>)}
             </div>
             <div className={d.messages}>
-                {messages.map(messages => <MessageItem message={messages.message}/>)}
+                {messages.map(messages => <Message message={messages.message}/>)}
             </div>
         </div>
     )

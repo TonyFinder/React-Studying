@@ -1,19 +1,13 @@
 import React from 'react';
 import p from './MyPosts.module.css';
 import Post from './Posts/Post';
+import {postsDataProps} from '../Profile';
 
-const MyPosts = () => {
+type MyPostsProps = {
+    posts: postsDataProps[]
+}
 
-    type postsDataProps = {
-        id: number
-        message: string
-        likesNumber: number
-    }
-
-    let posts: postsDataProps[] = [
-        {id: 1, message: "How are you?", likesNumber: 15},
-        {id: 2, message: "It is my first message!", likesNumber: 20},
-]
+const MyPosts = (props: MyPostsProps) => {
 
     return <div  className={p.description}>
         <h3>My post</h3>
@@ -24,7 +18,8 @@ const MyPosts = () => {
             <button>Add post</button>
         </div>
         <div className={p.posts}>
-            {posts.map(post => <Post message={post.message} likesNumber={post.likesNumber}/>)}
+            {props.posts.map(post => <Post message={post.message} likesNumber={post.likesNumber}/>)}
+            {/*{props.map(post => <Post message={post.message} likesNumber={post.likesNumber}/>)}*/}
         </div>
     </div>
 }
