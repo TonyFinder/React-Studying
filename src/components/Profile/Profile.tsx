@@ -1,22 +1,16 @@
 import React from 'react';
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from './ProfileInfo/ProfileInfo';
+import {postsDataProps} from '../../index';
 
-export type postsDataProps = {
-    id: number
-    message: string
-    likesNumber: number
+type ProfileProps = {
+    post: postsDataProps[]
 }
 
-let posts: postsDataProps[] = [
-    {id: 1, message: "How are you?", likesNumber: 15},
-    {id: 2, message: "It is my first message!", likesNumber: 20},
-]
-
-const Profile = (props: postsDataProps[]) => {
+const Profile = (props: ProfileProps) => {
     return <div>
         <ProfileInfo />
-        <MyPosts posts={posts}/>
+        <MyPosts posts={props.post}/>
     </div>
 }
 
