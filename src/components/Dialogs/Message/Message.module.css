@@ -1,0 +1,17 @@
+.positionMy{
+    text-align: end;
+}
+.positionMy img {
+    width: 25px;
+    height: 25px;
+    border-radius: 15px;
+}
+
+.positionYou{
+    text-align: left;
+}
+.positionYou img {
+    width: 25px;
+    height: 25px;
+    border-radius: 15px;
+}

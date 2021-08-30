@@ -11,12 +11,13 @@
 
 }
 
-.dialogItem.active{
+.dialogItem .active{
     color: gold;
 }
 
 .messages {
     padding: 10px;
+    width: 400px;
 }
 
 messageItem {

@@ -1,10 +1,10 @@
 import React from 'react';
 import p from './MyPosts.module.css';
 import Post from './Posts/Post';
-import {postsDataProps} from '../../../index';
+import {profilePagePropsType} from '../../../Redux/State';
 
 type MyPostsProps = {
-    posts: postsDataProps[]
+    posts: profilePagePropsType
 }
 
 const MyPosts = (props: MyPostsProps) => {
@@ -17,7 +17,7 @@ const MyPosts = (props: MyPostsProps) => {
             <button>Add post</button>
         </div>
         <div className={p.posts}>
-            {props.posts.map(post => <Post message={post.message} likesNumber={post.likesNumber}/>)}
+            {props.posts.posts.map(post => <Post message={post.message} likesNumber={post.likesNumber}/>)}
         </div>
     </div>
 }

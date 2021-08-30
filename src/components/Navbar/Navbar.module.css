@@ -12,3 +12,30 @@
 .item a.active {
   color: yellow;
 }
+
+.friends img {
+  width: 42px;
+  height: 42px;
+  border-radius: 30px;
+}
+
+.friendsText {
+  padding-top: 50px;
+  color: white;
+  font-size: 12px;
+}
+
+.header {
+  font-size: 32px;
+}
+
+.friendsColumn {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+}
+
+.friendsColumnText {
+  display: flex;
+  justify-content: center;
+}

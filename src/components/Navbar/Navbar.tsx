@@ -1,8 +1,13 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import n from './Navbar.module.css';
+import {dialogsPropsType} from '../../Redux/State';
 
-const Navbar = () => {
+type NavbarPropsType = {
+    sitebar: dialogsPropsType[]
+}
+
+const Navbar = (props: NavbarPropsType) => {
     return (
         <nav className={n.navi}>
             <div className={n.item}>
@@ -19,6 +24,18 @@ const Navbar = () => {
             </div>
             <div className={n.item}>
                 <NavLink to="settings" activeClassName={n.active}>Settings</NavLink>
+            </div>
+            <div className={`${n.friends} ${n.friendsText}`}>
+                <span className={n.header}>Friends</span>
+                <div className={n.friendsColumn}>
+                    {props.sitebar.map(friend =>
+                        (<div>
+                                <img src={friend.image}/>
+                                <div className={n.friendsColumnText}>{friend.name}</div>
+                            </div>
+                        )
+                    )}
+                </div>
             </div>
         </nav>
     )
