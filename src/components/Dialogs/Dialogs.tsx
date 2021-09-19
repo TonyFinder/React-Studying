@@ -9,6 +9,12 @@ type DialogsProps = {
 }
 
 const Dialogs = (props: DialogsProps) => {
+    let textareaMessage = React.createRef<HTMLTextAreaElement>()
+
+    const addMessageHandler = () => {
+        alert(textareaMessage.current?.value)
+    }
+
     return (
         <div className={d.allPageDialogs}>
             <div className={d.dialogs}>
@@ -16,6 +22,8 @@ const Dialogs = (props: DialogsProps) => {
             </div>
             <div className={d.messages}>
                 {props.dialogs.messages.map(messages => <Message message={messages.message} iTalk={messages.iTalk}/>)}
+                <textarea ref={textareaMessage}></textarea>
+                <button onClick={addMessageHandler}>Add message</button>
             </div>
         </div>
     )

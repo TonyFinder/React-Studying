@@ -7,18 +7,12 @@ type MessageItemPropsType = {
 }
 
 export const Message = (props: MessageItemPropsType) => {
-    {
-        if (props.iTalk) return (
-            <div className={m.positionMy}>
-                {props.message}
-                <img src={"https://omoro.ru/wp-content/uploads/2018/05/prikilnie-kartinki-na-avatarky-dlia-devyshek-48.jpg"}/>
-            </div>
-        )
-    }
+
     return (
-        <div className={m.positionYou}>
-            <img src={"https://www.blast.hk/attachments/68493/"}/>
-            {props.message}
+        <div className={props.iTalk ? m.positionMy : m.positionYou}>
+            {props.iTalk ? props.message : ""}
+            <img src={props.iTalk ? "https://omoro.ru/wp-content/uploads/2018/05/prikilnie-kartinki-na-avatarky-dlia-devyshek-48.jpg" : "https://www.blast.hk/attachments/68493/"}/>
+            {props.iTalk ? '' : props.message}
         </div>
     )
 }
