@@ -5,13 +5,15 @@ import {profilePagePropsType} from '../../../Redux/State';
 
 type MyPostsProps = {
     posts: profilePagePropsType
+    addPost: (message: string) => void
 }
 
 const MyPosts = (props: MyPostsProps) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const addPost = () => {
-        alert(newPostElement.current?.value)
+        const text = newPostElement.current?.value
+        if (text) props.addPost(text)
     }
 
     return <div  className={p.description}>
