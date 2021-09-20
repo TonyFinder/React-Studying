@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import p from './MyPosts.module.css';
 import Post from './Posts/Post';
 import {profilePagePropsType} from '../../../Redux/State';
@@ -9,18 +9,22 @@ type MyPostsProps = {
 }
 
 const MyPosts = (props: MyPostsProps) => {
-    let newPostElement = React.createRef<HTMLTextAreaElement>()
+    let [textMessage, setTextMessage] = useState('')
 
     const addPost = () => {
-        const text = newPostElement.current?.value
-        if (text) props.addPost(text)
+        if (textMessage) props.addPost(textMessage)
+        setTextMessage('')
     }
 
-    return <div  className={p.description}>
+    const onChangeTextareaMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        setTextMessage(e.currentTarget.value)
+    }
+
+    return <div className={p.description}>
         <h3>My post</h3>
         <div>
             <div>
-                <textarea ref={newPostElement}></textarea>
+                <textarea value={textMessage} onChange={onChangeTextareaMessage}></textarea>
             </div>
             <button onClick={addPost}>Add post</button>
         </div>
