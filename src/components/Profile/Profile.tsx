@@ -4,14 +4,15 @@ import ProfileInfo from './ProfileInfo/ProfileInfo';
 import {profilePagePropsType} from '../../Redux/State';
 
 type ProfileProps = {
-    post: profilePagePropsType
+    profilePage: profilePagePropsType
     addPost: (message: string) => void
+    onChangeCallback: (message: string) => void
 }
 
 const Profile = (props: ProfileProps) => {
     return <div>
         <ProfileInfo />
-        <MyPosts posts={props.post} addPost={props.addPost}/>
+        <MyPosts profilePage={props.profilePage} addPost={props.addPost} onChangeCallback={props.onChangeCallback}/>
     </div>
 }
 
