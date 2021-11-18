@@ -1,5 +1,7 @@
-import {rerender} from '../Render';
-import {useState} from 'react';
+let rerender = () => {
+    console.log("State is rendered")
+}
+
 
 export type dialogsPropsType = {
     id: number
@@ -98,10 +100,14 @@ export const state: statePropsType = {
 export const addPost = (message: string) => {
     state.profilePage.posts.push({id: state.profilePage.posts.length + 1, message: message, likesNumber: 0})
     state.profilePage.newPost = ""
-    rerender(state)
+    rerender()
 }
 
 export const onChangeCallback = (message: string) => {
     state.profilePage.newPost = message
-    rerender(state)
+    rerender()
+}
+
+export const subscribe = (observer: () => void) => {
+    rerender = observer
 }
