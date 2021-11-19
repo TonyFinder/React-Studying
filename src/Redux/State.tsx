@@ -137,3 +137,6 @@ export let store: storePropsType = {
         }
     }
 }
+
+export const addPostAC = () => ({type: 'ADD-POST' as const})
+export const newPostTextAC = (message: string) => ({type: 'NEW-POST-TEXT' as const, message: message})

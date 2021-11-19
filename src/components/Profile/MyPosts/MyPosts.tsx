@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from 'react';
 import p from './MyPosts.module.css';
 import Post from './Posts/Post';
-import {ActionPropsType, NewTextPostType, profilePagePropsType} from '../../../Redux/State';
+import {ActionPropsType, addPostAC, newPostTextAC, profilePagePropsType} from '../../../Redux/State';
 
 type MyPostsProps = {
     profilePage: profilePagePropsType
@@ -9,12 +9,8 @@ type MyPostsProps = {
 }
 
 const MyPosts = (props: MyPostsProps) => {
-    const addPost = () => {
-        props.dispatch({type: 'ADD-POST'})
-    }
-    const onChangeTextareaMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch({ type: 'NEW-POST-TEXT' , message: e.currentTarget.value})
-    }
+    const addPost = () => {props.dispatch(addPostAC())}
+    const onChangeTextareaMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {props.dispatch(newPostTextAC(e.currentTarget.value))}
 
     return <div className={p.description}>
         <h3>My post</h3>
