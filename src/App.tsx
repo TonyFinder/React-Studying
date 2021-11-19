@@ -8,12 +8,11 @@ import {HashRouter, Route} from 'react-router-dom';
 import Settings from './components/Settings/Settings';
 import Music from './components/Music/Music';
 import News from './components/News/News';
-import {statePropsType} from './Redux/State';
+import {ActionPropsType, statePropsType} from './Redux/State';
 
 type AppProps = {
     state: statePropsType
-    addPost: (message: string) => void
-    onChangeCallback: (message: string) => void
+    dispatch: (action: ActionPropsType) => void
 }
 
 const App = (props: AppProps) => {
@@ -23,11 +22,12 @@ const App = (props: AppProps) => {
                 <Header/>
                 <Navbar sitebar={props.state.sitebar}/>
                 <div className="app-wrapper-content">
-                    <Route path="/dialogs" render={ () => <Dialogs dialogs={props.state.dialogsPage}/>}/>
-                    <Route path="/profile" render={ () => <Profile profilePage={props.state.profilePage} addPost={props.addPost} onChangeCallback={props.onChangeCallback}/>}/>
-                    <Route path="/news" render={ () => <News/>}/>
-                    <Route path="/music" render={ () => <Music/>}/>
-                    <Route path="/settings" render={ () => <Settings/>}/>
+                    <Route path="/dialogs" render={() => <Dialogs dialogs={props.state.dialogsPage}/>}/>
+                    <Route path="/profile"
+                           render={() => <Profile profilePage={props.state.profilePage} dispatch={props.dispatch}/>}/>
+                    <Route path="/news" render={() => <News/>}/>
+                    <Route path="/music" render={() => <Music/>}/>
+                    <Route path="/settings" render={() => <Settings/>}/>
                 </div>
             </div>
         </HashRouter>

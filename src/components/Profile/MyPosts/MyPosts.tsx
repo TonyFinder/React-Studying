@@ -1,29 +1,26 @@
 import React, {ChangeEvent} from 'react';
 import p from './MyPosts.module.css';
 import Post from './Posts/Post';
-import {profilePagePropsType} from '../../../Redux/State';
+import {ActionPropsType, NewTextPostType, profilePagePropsType} from '../../../Redux/State';
 
 type MyPostsProps = {
     profilePage: profilePagePropsType
-    addPost: (message: string) => void
-    onChangeCallback: (message: string) => void
+    dispatch: (action: ActionPropsType) => void
 }
 
 const MyPosts = (props: MyPostsProps) => {
-
     const addPost = () => {
-        props.addPost(props.profilePage.newPost)
+        props.dispatch({type: 'ADD-POST'})
     }
-
     const onChangeTextareaMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.onChangeCallback(e.currentTarget.value)
+        props.dispatch({ type: 'NEW-POST-TEXT' , message: e.currentTarget.value})
     }
 
     return <div className={p.description}>
         <h3>My post</h3>
         <div>
             <div>
-                <textarea value={props.profilePage.newPost} onChange={onChangeTextareaMessage}></textarea>
+                <textarea value={props.profilePage.newPost} onChange={onChangeTextareaMessage}/>
             </div>
             <button onClick={addPost}>Add post</button>
         </div>

@@ -32,13 +32,21 @@ export type statePropsType = {
     sitebar: dialogsPropsType[]
 }
 
+export type AddPostType = {
+    type: 'ADD-POST'
+}
+export type NewTextPostType = {
+    type: 'NEW-POST-TEXT'
+    message: string
+}
+export type ActionPropsType = AddPostType | NewTextPostType
+
 export type storePropsType = {
     _state: statePropsType
+    _rerender: () => void
     getState: () => statePropsType
-    addPost: (message: string) => void
-    onChangeCallback: (message: string) => void
-    rerender: () => void
-    subscribe: (observer: ()=> void) => void
+    subscribe: (observer: () => void) => void
+    dispatch: (action: ActionPropsType) => void
 }
 
 export let store: storePropsType = {
@@ -61,7 +69,11 @@ export let store: storePropsType = {
                     name: 'Sasha',
                     image: 'data:image/jpeg;base64,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'
                 },
-                {id: 5, name: 'Viktor', image: 'https://images.assetsdelivery.com/compings_v2/yupiramos/yupiramos1610/yupiramos161007352.jpg'},
+                {
+                    id: 5,
+                    name: 'Viktor',
+                    image: 'https://images.assetsdelivery.com/compings_v2/yupiramos/yupiramos1610/yupiramos161007352.jpg'
+                },
                 {
                     id: 6,
                     name: 'Valera',
@@ -81,7 +93,7 @@ export let store: storePropsType = {
                 {id: 1, message: 'How are you?', likesNumber: 15},
                 {id: 2, message: 'It is my first message!', likesNumber: 20}
             ],
-            newPost: "It-world is cool"
+            newPost: 'It-world is cool'
         },
         sitebar: [
             {
@@ -101,22 +113,27 @@ export let store: storePropsType = {
             }
         ]
     },
-    getState () {
-      return this._state
+    _rerender() {
+        console.log('State is rendered')
     },
-    addPost(message: string) {
-        this._state.profilePage.posts.push({id: this._state.profilePage.posts.length + 1, message: message, likesNumber: 0})
-        this._state.profilePage.newPost = ""
-        this.rerender()
-    },
-    onChangeCallback(message: string) {
-        this._state.profilePage.newPost = message
-        this.rerender()
-    },
-    rerender() {
-        console.log("State is rendered")
+    getState() {
+        return this._state
     },
     subscribe(observer) {
-        this.rerender = observer
+        this._rerender = observer
+    },
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            this._state.profilePage.posts.push({
+                id: this._state.profilePage.posts.length + 1,
+                message: this._state.profilePage.newPost,
+                likesNumber: 0
+            })
+            this._state.profilePage.newPost = ''
+            this._rerender()
+        } else if (action.type === 'NEW-POST-TEXT') {
+            this._state.profilePage.newPost = action.message
+            this._rerender()
+        }
     }
 }

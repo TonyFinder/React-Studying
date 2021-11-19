@@ -1,18 +1,17 @@
 import React from 'react';
 import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
-import {profilePagePropsType} from '../../Redux/State';
+import {ActionPropsType, profilePagePropsType} from '../../Redux/State';
 
 type ProfileProps = {
     profilePage: profilePagePropsType
-    addPost: (message: string) => void
-    onChangeCallback: (message: string) => void
+    dispatch: (action: ActionPropsType) => void
 }
 
 const Profile = (props: ProfileProps) => {
     return <div>
         <ProfileInfo />
-        <MyPosts profilePage={props.profilePage} addPost={props.addPost} onChangeCallback={props.onChangeCallback}/>
+        <MyPosts profilePage={props.profilePage} dispatch={props.dispatch}/>
     </div>
 }
 
