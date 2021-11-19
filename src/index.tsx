@@ -2,16 +2,17 @@ import React from 'react';
 import './index.css';
 import ReactDOM from 'react-dom';
 import App from './App';
-import {addPost, onChangeCallback, state, subscribe} from './Redux/State';
+import {store} from './Redux/State';
+
 
 let rerender = () => {
     ReactDOM.render(
         <React.StrictMode>
-            <App state={state} addPost={addPost} onChangeCallback={onChangeCallback}/>
+            <App state={store.getState()} addPost={store.addPost.bind(store)} onChangeCallback={store.onChangeCallback.bind(store)}/>
         </React.StrictMode>,
         document.getElementById('root')
     );
 }
 
+store.subscribe(rerender)
 rerender()
-subscribe(rerender)

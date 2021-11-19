@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent} from 'react';
 import p from './MyPosts.module.css';
 import Post from './Posts/Post';
 import {profilePagePropsType} from '../../../Redux/State';
@@ -28,7 +28,7 @@ const MyPosts = (props: MyPostsProps) => {
             <button onClick={addPost}>Add post</button>
         </div>
         <div className={p.posts}>
-            {props.profilePage.posts.map(post => <Post message={post.message} likesNumber={post.likesNumber}/>)}
+            {props.profilePage.posts.map(post => <Post key={post.id} message={post.message} likesNumber={post.likesNumber}/>)}
         </div>
     </div>
 }

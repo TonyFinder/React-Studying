@@ -29,7 +29,7 @@ const Navbar = (props: NavbarPropsType) => {
                 <span className={n.header}>Friends</span>
                 <div className={n.friendsColumn}>
                     {props.sitebar.map(friend =>
-                        (<div>
+                        (<div key={friend.id}>
                                 <img src={friend.image}/>
                                 <div className={n.friendsColumnText}>{friend.name}</div>
                             </div>
