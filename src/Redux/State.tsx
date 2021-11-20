@@ -32,14 +32,14 @@ export type statePropsType = {
     sitebar: dialogsPropsType[]
 }
 
-export type AddPostType = {
+/*export type AddPostType = {
     type: 'ADD-POST'
 }
 export type NewTextPostType = {
     type: 'NEW-POST-TEXT'
     message: string
-}
-export type ActionPropsType = AddPostType | NewTextPostType
+}*/
+export type ActionPropsType = ReturnType<typeof addPostAC> | ReturnType<typeof newPostTextAC>
 
 export type storePropsType = {
     _state: statePropsType
@@ -138,5 +138,5 @@ export let store: storePropsType = {
     }
 }
 
-export const addPostAC = () => ({type: 'ADD-POST' as const})
-export const newPostTextAC = (message: string) => ({type: 'NEW-POST-TEXT' as const, message: message})
+export const addPostAC = () => ({type: 'ADD-POST'} as const)
+export const newPostTextAC = (message: string) => ({type: 'NEW-POST-TEXT', message: message} as const)
