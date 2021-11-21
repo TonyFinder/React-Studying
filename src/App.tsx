@@ -22,7 +22,7 @@ const App = (props: AppProps) => {
                 <Header/>
                 <Navbar sitebar={props.state.sitebar}/>
                 <div className="app-wrapper-content">
-                    <Route path="/dialogs" render={() => <Dialogs dialogs={props.state.dialogsPage}/>}/>
+                    <Route path="/dialogs" render={() => <Dialogs dialogs={props.state.dialogsPage} dispatch={props.dispatch}/>}/>
                     <Route path="/profile"
                            render={() => <Profile profilePage={props.state.profilePage} dispatch={props.dispatch}/>}/>
                     <Route path="/news" render={() => <News/>}/>

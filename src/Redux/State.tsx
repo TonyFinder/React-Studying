@@ -3,44 +3,31 @@ export type dialogsPropsType = {
     name: string
     image: string
 }
-
 export type postsPropsType = {
     id: number
     message: string
     likesNumber: number
 }
-
 export type messagesPropsType = {
     id: number
     message: string
     iTalk: boolean
 }
-
 export type profilePagePropsType = {
     posts: postsPropsType[]
     newPost: string
 }
-
 export type dialogsPagePropsType = {
     dialogs: dialogsPropsType[]
     messages: messagesPropsType[]
+    newMessage: string
 }
-
 export type statePropsType = {
     dialogsPage: dialogsPagePropsType
     profilePage: profilePagePropsType
     sitebar: dialogsPropsType[]
 }
-
-/*export type AddPostType = {
-    type: 'ADD-POST'
-}
-export type NewTextPostType = {
-    type: 'NEW-POST-TEXT'
-    message: string
-}*/
-export type ActionPropsType = ReturnType<typeof addPostAC> | ReturnType<typeof newPostTextAC>
-
+export type ActionPropsType = ReturnType<typeof addPostAC> | ReturnType<typeof newPostTextAC> | ReturnType<typeof newMessageAC> | ReturnType<typeof addNewMessageAC>
 export type storePropsType = {
     _state: statePropsType
     _rerender: () => void
@@ -86,7 +73,8 @@ export let store: storePropsType = {
                 {id: 3, message: 'Yo', iTalk: true},
                 {id: 4, message: 'Yo', iTalk: true},
                 {id: 5, message: 'Yo', iTalk: false}
-            ]
+            ],
+            newMessage: ""
         },
         profilePage: {
             posts: [
@@ -134,9 +122,18 @@ export let store: storePropsType = {
         } else if (action.type === 'NEW-POST-TEXT') {
             this._state.profilePage.newPost = action.message
             this._rerender()
+        } else if (action.type === "NEW-MESSAGE-TEXT") {
+            this._state.dialogsPage.newMessage = action.message
+            this._rerender()
+        } else if (action.type === 'ADD-MESSAGE') {
+            this._state.dialogsPage.messages.push({id: this._state.dialogsPage.messages.length + 1, message: this._state.dialogsPage.newMessage, iTalk: true})
+            this._state.dialogsPage.newMessage = ""
+            this._rerender()
         }
     }
 }
 
 export const addPostAC = () => ({type: 'ADD-POST'} as const)
 export const newPostTextAC = (message: string) => ({type: 'NEW-POST-TEXT', message: message} as const)
+export const newMessageAC = (message: string) => ({type: "NEW-MESSAGE-TEXT", message: message} as const)
+export const addNewMessageAC = () => ({type: "ADD-MESSAGE"} as const)
