@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import n from './Navbar.module.css';
-import {dialogsPropsType} from '../../Redux/State';
+import {dialogsPropsType} from '../../Redux/Store';
 
 type NavbarPropsType = {
     sitebar: dialogsPropsType[]

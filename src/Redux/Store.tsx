@@ -1,3 +1,7 @@
+import {addNewMessageAC, dialogReducer, newMessageAC} from './dialogs_reducer';
+import {addPostAC, newPostTextAC, profileReducer} from './profile_reducer';
+import {sitebarReducer} from './sitebar_reducer';
+
 export type dialogsPropsType = {
     id: number
     name: string
@@ -111,29 +115,10 @@ export let store: storePropsType = {
         this._rerender = observer
     },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            this._state.profilePage.posts.push({
-                id: this._state.profilePage.posts.length + 1,
-                message: this._state.profilePage.newPost,
-                likesNumber: 0
-            })
-            this._state.profilePage.newPost = ''
-            this._rerender()
-        } else if (action.type === 'NEW-POST-TEXT') {
-            this._state.profilePage.newPost = action.message
-            this._rerender()
-        } else if (action.type === "NEW-MESSAGE-TEXT") {
-            this._state.dialogsPage.newMessage = action.message
-            this._rerender()
-        } else if (action.type === 'ADD-MESSAGE') {
-            this._state.dialogsPage.messages.push({id: this._state.dialogsPage.messages.length + 1, message: this._state.dialogsPage.newMessage, iTalk: true})
-            this._state.dialogsPage.newMessage = ""
-            this._rerender()
-        }
+        dialogReducer(this._state.dialogsPage, action)
+        profileReducer(this._state.profilePage, action)
+        sitebarReducer(this._state.sitebar, action)
+
+        this._rerender()
     }
 }
-
-export const addPostAC = () => ({type: 'ADD-POST'} as const)
-export const newPostTextAC = (message: string) => ({type: 'NEW-POST-TEXT', message: message} as const)
-export const newMessageAC = (message: string) => ({type: "NEW-MESSAGE-TEXT", message: message} as const)
-export const addNewMessageAC = () => ({type: "ADD-MESSAGE"} as const)
