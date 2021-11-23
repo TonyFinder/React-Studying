@@ -15,7 +15,7 @@ import {ActionSitebarPropsType, SitebarPropsType} from './Redux/sitebar_reducer'
 type AppProps = {
     dialogsPage: DialogsPagePropsType
     profilePage: ProfilePagePropsType
-    sitebar: SitebarPropsType[]
+    sitebar: SitebarPropsType
     dispatch: (action: ActionDialogPropsType | ActionProfilePropsType | ActionSitebarPropsType) => void
 }
 

@@ -4,7 +4,7 @@ import n from './Navbar.module.css';
 import {SitebarPropsType} from '../../Redux/sitebar_reducer';
 
 type NavbarPropsType = {
-    sitebar: SitebarPropsType[]
+    sitebar: SitebarPropsType
 }
 
 const Navbar = (props: NavbarPropsType) => {
@@ -28,7 +28,7 @@ const Navbar = (props: NavbarPropsType) => {
             <div className={`${n.friends} ${n.friendsText}`}>
                 <span className={n.header}>Friends</span>
                 <div className={n.friendsColumn}>
-                    {props.sitebar.map(friend =>
+                    {props.sitebar.friends.map(friend =>
                         (<div key={friend.id}>
                                 <img alt="avatar" src={friend.image}/>
                                 <div className={n.friendsColumnText}>{friend.name}</div>
