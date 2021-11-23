@@ -1,5 +1,13 @@
-import {ActionPropsType, dialogsPropsType} from './Store';
+export type SitebarPropsType = {
+    id: number
+    name: string
+    image: string
+}
 
-export const sitebarReducer = (state: dialogsPropsType[], action: ActionPropsType) => {
+let initialState: SitebarPropsType[] = []
+
+export type ActionSitebarPropsType = { type: "NOT-AN-ACTION" }
+
+export const sitebarReducer = (state: SitebarPropsType[] = initialState, action: ActionSitebarPropsType) => {
     return state
 }

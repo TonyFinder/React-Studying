@@ -8,11 +8,15 @@ import {HashRouter, Route} from 'react-router-dom';
 import Settings from './components/Settings/Settings';
 import Music from './components/Music/Music';
 import News from './components/News/News';
-import {ActionPropsType, statePropsType} from './Redux/Store';
+import {ActionDialogPropsType, DialogsPagePropsType} from './Redux/dialogs_reducer';
+import {ActionProfilePropsType, ProfilePagePropsType} from './Redux/profile_reducer';
+import {ActionSitebarPropsType, SitebarPropsType} from './Redux/sitebar_reducer';
 
 type AppProps = {
-    state: statePropsType
-    dispatch: (action: ActionPropsType) => void
+    dialogsPage: DialogsPagePropsType
+    profilePage: ProfilePagePropsType
+    sitebar: SitebarPropsType[]
+    dispatch: (action: ActionDialogPropsType | ActionProfilePropsType | ActionSitebarPropsType) => void
 }
 
 const App = (props: AppProps) => {
@@ -20,11 +24,12 @@ const App = (props: AppProps) => {
         <HashRouter>
             <div className="app-wrapper">
                 <Header/>
-                <Navbar sitebar={props.state.sitebar}/>
+                <Navbar sitebar={props.sitebar}/>
                 <div className="app-wrapper-content">
-                    <Route path="/dialogs" render={() => <Dialogs dialogs={props.state.dialogsPage} dispatch={props.dispatch}/>}/>
+                    <Route path="/dialogs"
+                           render={() => <Dialogs dialogs={props.dialogsPage} dispatch={props.dispatch}/>}/>
                     <Route path="/profile"
-                           render={() => <Profile profilePage={props.state.profilePage} dispatch={props.dispatch}/>}/>
+                           render={() => <Profile profilePage={props.profilePage} dispatch={props.dispatch}/>}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>

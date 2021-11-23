@@ -9,7 +9,7 @@ type PostPropsType = {
 const Post: React.FC<PostPropsType> = (props) => {
     return (
         <div className={p.item}>
-            <img
+            <img alt="avatar"
                 src="https://images.hindustantimes.com/rf/image_size_630x354/HT/p2/2020/05/13/Pictures/_67aa6b5c-94d7-11ea-9070-932bbf5d90a5.jpg"/>
             {props.message}
             <div>

@@ -1,7 +1,9 @@
+// Для истории
+
 import {addNewMessageAC, dialogReducer, newMessageAC} from './dialogs_reducer';
 import {addPostAC, newPostTextAC, profileReducer} from './profile_reducer';
 import {sitebarReducer} from './sitebar_reducer';
-
+/*
 export type dialogsPropsType = {
     id: number
     name: string
@@ -31,7 +33,11 @@ export type statePropsType = {
     profilePage: profilePagePropsType
     sitebar: dialogsPropsType[]
 }
-export type ActionPropsType = ReturnType<typeof addPostAC> | ReturnType<typeof newPostTextAC> | ReturnType<typeof newMessageAC> | ReturnType<typeof addNewMessageAC>
+export type ActionPropsType =
+    ReturnType<typeof addPostAC>
+    | ReturnType<typeof newPostTextAC>
+    | ReturnType<typeof newMessageAC>
+    | ReturnType<typeof addNewMessageAC>
 export type storePropsType = {
     _state: statePropsType
     _rerender: () => void
@@ -78,7 +84,7 @@ export let store: storePropsType = {
                 {id: 4, message: 'Yo', iTalk: true},
                 {id: 5, message: 'Yo', iTalk: false}
             ],
-            newMessage: ""
+            newMessage: ''
         },
         profilePage: {
             posts: [
@@ -122,3 +128,4 @@ export let store: storePropsType = {
         this._rerender()
     }
 }
+*/

@@ -1,10 +1,10 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import n from './Navbar.module.css';
-import {dialogsPropsType} from '../../Redux/Store';
+import {SitebarPropsType} from '../../Redux/sitebar_reducer';
 
 type NavbarPropsType = {
-    sitebar: dialogsPropsType[]
+    sitebar: SitebarPropsType[]
 }
 
 const Navbar = (props: NavbarPropsType) => {
@@ -30,7 +30,7 @@ const Navbar = (props: NavbarPropsType) => {
                 <div className={n.friendsColumn}>
                     {props.sitebar.map(friend =>
                         (<div key={friend.id}>
-                                <img src={friend.image}/>
+                                <img alt="avatar" src={friend.image}/>
                                 <div className={n.friendsColumnText}>{friend.name}</div>
                             </div>
                         )

@@ -1,11 +1,11 @@
 import React from 'react';
 import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
-import {ActionPropsType, profilePagePropsType} from '../../Redux/Store';
+import {ActionProfilePropsType, ProfilePagePropsType} from '../../Redux/profile_reducer';
 
 type ProfileProps = {
-    profilePage: profilePagePropsType
-    dispatch: (action: ActionPropsType) => void
+    profilePage: ProfilePagePropsType
+    dispatch: (action: ActionProfilePropsType) => void
 }
 
 const Profile = (props: ProfileProps) => {
