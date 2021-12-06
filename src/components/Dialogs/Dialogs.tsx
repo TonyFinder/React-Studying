@@ -2,16 +2,17 @@ import React, {ChangeEvent} from 'react';
 import d from './Dialogs.module.css';
 import {DialogItems} from './DialogItems/DialogItems';
 import {Message} from './Message/Message';
-import {ActionDialogPropsType, addNewMessageAC, DialogsPagePropsType, newMessageAC} from '../../Redux/dialogs_reducer';
+import {DialogsPagePropsType} from '../../Redux/dialogs_reducer';
 
 type DialogsProps = {
     dialogs: DialogsPagePropsType
-    dispatch: (action: ActionDialogPropsType) => void
+    changeMessageHandler: (e: ChangeEvent<HTMLTextAreaElement>) => void
+    addMessageHandler: () => void
 }
 
 const Dialogs = (props: DialogsProps) => {
-    const changeMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {props.dispatch(newMessageAC(e.currentTarget.value))}
-    const addMessageHandler = () => {props.dispatch(addNewMessageAC())}
+    const changeMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => props.changeMessageHandler(e)
+    const addMessageHandler = () => props.addMessageHandler()
 
     return (
         <div className={d.allPageDialogs}>

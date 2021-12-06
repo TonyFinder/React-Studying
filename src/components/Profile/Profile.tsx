@@ -1,7 +1,7 @@
 import React from 'react';
-import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import {ActionProfilePropsType, ProfilePagePropsType} from '../../Redux/profile_reducer';
+import MyPostsContainer from './MyPosts/MyPostsContainer';
 
 type ProfileProps = {
     profilePage: ProfilePagePropsType
@@ -11,7 +11,7 @@ type ProfileProps = {
 const Profile = (props: ProfileProps) => {
     return <div>
         <ProfileInfo />
-        <MyPosts profilePage={props.profilePage} dispatch={props.dispatch}/>
+        <MyPostsContainer profilePage={props.profilePage} dispatch={props.dispatch}/>
     </div>
 }
 
