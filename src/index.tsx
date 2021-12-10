@@ -5,7 +5,6 @@ import App from './App';
 import {store} from './Redux/redux-store';
 import {Provider} from 'react-redux';
 
-
 let rerender = () => {
     ReactDOM.render(
         <React.StrictMode>
@@ -17,5 +16,4 @@ let rerender = () => {
     );
 }
 
-store.subscribe(rerender)
 rerender()

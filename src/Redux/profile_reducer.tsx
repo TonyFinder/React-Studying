@@ -24,15 +24,9 @@ export type ActionProfilePropsType = ReturnType<typeof addPostAC> | ReturnType<t
 export const profileReducer = (state: ProfilePagePropsType = initialState, action: ActionProfilePropsType): ProfilePagePropsType => {
     switch (action.type) {
         case 'NEW-POST-TEXT':
-            let newState = {...state}
-            newState.newPost = action.message
-            return newState
+            return {...state, newPost: action.message}
         case 'ADD-POST':
-            let newPost = {...state}
-            newPost.posts = state.posts.map(m => m)
-            newPost.posts.push({id: state.posts.length + 1, message: state.newPost, likesNumber: 0})
-            newPost.newPost = ""
-            return newPost
+            return {...state, posts: [...state.posts, {id: state.posts.length + 1, message: state.newPost, likesNumber: 0}], newPost: ""}
         default:
             return state
     }
