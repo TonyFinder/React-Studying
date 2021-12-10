@@ -8,13 +8,9 @@ export type MessagesPropsType = {
     message: string
     iTalk: boolean
 }
-export type DialogsPagePropsType = {
-    dialogs: DialogsPropsType[]
-    messages: MessagesPropsType[]
-    newMessage: string
-}
 
-let ititialState: DialogsPagePropsType = {
+
+let initialState = {
     dialogs: [
         {
             id: 1,
@@ -42,30 +38,35 @@ let ititialState: DialogsPagePropsType = {
             name: 'Valera',
             image: 'data:image/jpeg;base64,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'
         }
-    ],
-        messages: [
+    ] as DialogsPropsType[],
+    messages: [
         {id: 1, message: 'Hi', iTalk: true},
         {id: 2, message: 'How is your it-kamasutra?', iTalk: false},
         {id: 3, message: 'Yo', iTalk: true},
         {id: 4, message: 'Yo', iTalk: true},
         {id: 5, message: 'Yo', iTalk: false}
-    ],
-        newMessage: ""
+    ] as MessagesPropsType[],
+    newMessage: ''
 }
 
-export const newMessageAC = (message: string) => ({type: "NEW-MESSAGE-TEXT", message: message} as const)
-export const addNewMessageAC = () => ({type: "ADD-MESSAGE"} as const)
+export type InitialStateDialogsType = typeof initialState
+
+export const newMessageAC = (message: string) => ({type: 'NEW-MESSAGE-TEXT', message: message} as const)
+export const addNewMessageAC = () => ({type: 'ADD-MESSAGE'} as const)
 export type ActionDialogPropsType = ReturnType<typeof newMessageAC> | ReturnType<typeof addNewMessageAC>
 
-export const dialogReducer = (state: DialogsPagePropsType = ititialState, action: ActionDialogPropsType) => {
+export const dialogReducer = (state: InitialStateDialogsType = initialState, action: ActionDialogPropsType): InitialStateDialogsType => {
     switch (action.type) {
         case 'NEW-MESSAGE-TEXT':
-            state.newMessage = action.message
-            return state
+            let newState = {...state}
+            newState.newMessage = action.message
+            return newState
         case 'ADD-MESSAGE':
-            state.messages.push({id: state.messages.length + 1, message: state.newMessage, iTalk: true})
-            state.newMessage = ""
-            return state
+            let newMessage = {...state}
+            newMessage.messages = state.messages.map(m => m)
+            newMessage.messages.push({id: newMessage.messages.length + 1, message: newMessage.newMessage, iTalk: true})
+            newMessage.newMessage = ''
+            return newMessage
         default:
             return state
     }

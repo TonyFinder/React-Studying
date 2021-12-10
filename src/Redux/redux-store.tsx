@@ -1,12 +1,15 @@
-import {combineReducers, createStore } from "redux";
+import {combineReducers, createStore} from 'redux';
 import {dialogReducer} from './dialogs_reducer';
 import {profileReducer} from './profile_reducer';
 import {sitebarReducer} from './sitebar_reducer';
 
-let reducers = combineReducers ({
+export const rootReducers = combineReducers ({
     dialogsPage: dialogReducer,
     profilePage: profileReducer,
     sitebar: sitebarReducer
 })
 
-export let store = createStore(reducers)
+// Типизация стейта автоматическая.
+export type AppStateType = ReturnType<typeof rootReducers>
+
+export const store = createStore(rootReducers)
