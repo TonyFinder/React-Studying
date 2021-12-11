@@ -1,0 +1,42 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 20px;
+    width: 60%;
+}
+
+.imageBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 15%;
+}
+.usersBlocks {
+    display: flex;
+    margin: 10px 0px;
+    align-items: center;
+}
+
+.image {
+    height: 80px;
+    width: 80px;
+    border-radius: 50px;
+}
+.rightField {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 85%;
+    padding: 10px;
+    margin-left: 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+.upField {
+    display: flex;
+    justify-content: space-between;
+}
+.status {
+    font-style: italic;
+}

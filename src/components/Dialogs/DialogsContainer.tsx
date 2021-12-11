@@ -6,21 +6,21 @@ import {AppStateType} from '../../Redux/redux-store';
 import {Dispatch} from 'redux';
 
 // Нужно типизировать то, что mapStateToProps возвращает
-export type MapStateToProps = {
+export type MapStateToPropsType = {
     dialogsPage: InitialStateDialogsType
 }
-export type MapDispatchToProps = {
+export type MapDispatchToPropsType = {
     changeMessageHandler: (e: ChangeEvent<HTMLTextAreaElement>) => void
     addMessageHandler: () => void
 }
-export type DialogsPropsType = MapStateToProps & MapDispatchToProps
+export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-let mapStateToProps = (state: AppStateType): MapStateToProps => {
+let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         dialogsPage: state.dialogsPage
     }
 }
-let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
+let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
         changeMessageHandler: (e: ChangeEvent<HTMLTextAreaElement>) => {
             dispatch(newMessageAC(e.currentTarget.value))

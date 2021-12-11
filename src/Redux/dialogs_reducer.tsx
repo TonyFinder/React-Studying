@@ -9,7 +9,6 @@ export type MessagesPropsType = {
     iTalk: boolean
 }
 
-
 let initialState = {
     dialogs: [
         {

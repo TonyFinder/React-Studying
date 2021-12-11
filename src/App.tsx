@@ -9,6 +9,7 @@ import News from './components/News/News';
 import {SitebarPropsType} from './Redux/sitebar_reducer';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import Profile from './components/Profile/Profile';
+import {UsersContainer} from './components/Users/UsersContainer';
 
 type AppProps = {
     sitebar: SitebarPropsType
@@ -25,6 +26,8 @@ const App = (props: AppProps) => {
                            render={() => <DialogsContainer />}/>
                     <Route path="/profile"
                            render={() => <Profile />}/>
+                    <Route path="/users"
+                           render={() => <UsersContainer />}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>
