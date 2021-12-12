@@ -3,89 +3,149 @@ import {followAC, setUsersAC, UsersPagePropsType, usersReducer} from './users_re
 
 test('Change following status', () => {
     let beginUsers: UsersPagePropsType = {
-        users: [
+        "items": [
             {
-                id: 1,
-                follow: false,
-                name: 'Alex',
-                image: 'https://thumbs.dreamstime.com/b/businessman-icon-image-male-avatar-profile-vector-glasses-beard-hairstyle-179728610.jpg',
-                location: {country: 'Russia', city: 'Moscow'},
-                status: 'I am fine!'
+                "name": "merkuriy7",
+                "id": 21306,
+                "uniqueUrlName": null,
+                "photos": {
+                    "small": null,
+                    "large": null
+                },
+                "status": null,
+                "followed": false
             },
             {
-                id: 2,
-                follow: true,
-                name: 'Anton',
-                image: 'https://thumbs.dreamstime.com/b/businessman-icon-image-male-avatar-profile-vector-glasses-beard-hairstyle-179728610.jpg',
-                location: {country: 'Canada', city: 'Calgary'},
-                status: 'Everything is ok!'
+                "name": "darkgoanna",
+                "id": 21305,
+                "uniqueUrlName": null,
+                "photos": {
+                    "small": null,
+                    "large": null
+                },
+                "status": null,
+                "followed": false
             },
             {
-                id: 3,
-                follow: false,
-                name: 'Anna',
-                image: 'https://thumbs.dreamstime.com/b/businessman-icon-image-male-avatar-profile-vector-glasses-beard-hairstyle-179728610.jpg',
-                location: {country: 'USA', city: 'Dallas'},
-                status: 'Life is good!'
+                "name": "ron1888",
+                "id": 21304,
+                "uniqueUrlName": null,
+                "photos": {
+                    "small": null,
+                    "large": null
+                },
+                "status": null,
+                "followed": false
+            },
+            {
+                "name": "butrik",
+                "id": 21303,
+                "uniqueUrlName": null,
+                "photos": {
+                    "small": null,
+                    "large": null
+                },
+                "status": null,
+                "followed": false
             }
         ]
     }
 
-    let endUsers = usersReducer(beginUsers, followAC(3))
+    let endUsers = usersReducer(beginUsers, followAC(21305))
 
     expect(endUsers).toEqual({
-        users: [
+        "items": [
             {
-                id: 1,
-                follow: false,
-                name: 'Alex',
-                image: 'https://thumbs.dreamstime.com/b/businessman-icon-image-male-avatar-profile-vector-glasses-beard-hairstyle-179728610.jpg',
-                location: {country: 'Russia', city: 'Moscow'},
-                status: 'I am fine!'
+                "name": "merkuriy7",
+                "id": 21306,
+                "uniqueUrlName": null,
+                "photos": {
+                    "small": null,
+                    "large": null
+                },
+                "status": null,
+                "followed": false
             },
             {
-                id: 2,
-                follow: true,
-                name: 'Anton',
-                image: 'https://thumbs.dreamstime.com/b/businessman-icon-image-male-avatar-profile-vector-glasses-beard-hairstyle-179728610.jpg',
-                location: {country: 'Canada', city: 'Calgary'},
-                status: 'Everything is ok!'
+                "name": "darkgoanna",
+                "id": 21305,
+                "uniqueUrlName": null,
+                "photos": {
+                    "small": null,
+                    "large": null
+                },
+                "status": null,
+                "followed": true
             },
             {
-                id: 3,
-                follow: true,
-                name: 'Anna',
-                image: 'https://thumbs.dreamstime.com/b/businessman-icon-image-male-avatar-profile-vector-glasses-beard-hairstyle-179728610.jpg',
-                location: {country: 'USA', city: 'Dallas'},
-                status: 'Life is good!'
+                "name": "ron1888",
+                "id": 21304,
+                "uniqueUrlName": null,
+                "photos": {
+                    "small": null,
+                    "large": null
+                },
+                "status": null,
+                "followed": false
+            },
+            {
+                "name": "butrik",
+                "id": 21303,
+                "uniqueUrlName": null,
+                "photos": {
+                    "small": null,
+                    "large": null
+                },
+                "status": null,
+                "followed": false
             }
         ]
     })
     expect(beginUsers).toEqual({
-        users: [
+        "items": [
             {
-                id: 1,
-                follow: false,
-                name: 'Alex',
-                image: 'https://thumbs.dreamstime.com/b/businessman-icon-image-male-avatar-profile-vector-glasses-beard-hairstyle-179728610.jpg',
-                location: {country: 'Russia', city: 'Moscow'},
-                status: 'I am fine!'
+                "name": "merkuriy7",
+                "id": 21306,
+                "uniqueUrlName": null,
+                "photos": {
+                    "small": null,
+                    "large": null
+                },
+                "status": null,
+                "followed": false
             },
             {
-                id: 2,
-                follow: true,
-                name: 'Anton',
-                image: 'https://thumbs.dreamstime.com/b/businessman-icon-image-male-avatar-profile-vector-glasses-beard-hairstyle-179728610.jpg',
-                location: {country: 'Canada', city: 'Calgary'},
-                status: 'Everything is ok!'
+                "name": "darkgoanna",
+                "id": 21305,
+                "uniqueUrlName": null,
+                "photos": {
+                    "small": null,
+                    "large": null
+                },
+                "status": null,
+                "followed": false
             },
             {
-                id: 3,
-                follow: false,
-                name: 'Anna',
-                image: 'https://thumbs.dreamstime.com/b/businessman-icon-image-male-avatar-profile-vector-glasses-beard-hairstyle-179728610.jpg',
-                location: {country: 'USA', city: 'Dallas'},
-                status: 'Life is good!'
+                "name": "ron1888",
+                "id": 21304,
+                "uniqueUrlName": null,
+                "photos": {
+                    "small": null,
+                    "large": null
+                },
+                "status": null,
+                "followed": false
+            },
+            {
+                "name": "butrik",
+                "id": 21303,
+                "uniqueUrlName": null,
+                "photos": {
+                    "small": null,
+                    "large": null
+                },
+                "status": null,
+                "followed": false
             }
         ]
     })
@@ -93,33 +153,53 @@ test('Change following status', () => {
 
 test('Set new Users', () => {
     let beginUsers: UsersPagePropsType = {
-        users: []
+        items: []
     }
     let addUsers: UsersPagePropsType = {
-        users: [
+        "items": [
             {
-                id: 1,
-                follow: false,
-                name: 'Alex',
-                image: 'https://thumbs.dreamstime.com/b/businessman-icon-image-male-avatar-profile-vector-glasses-beard-hairstyle-179728610.jpg',
-                location: {country: 'Russia', city: 'Moscow'},
-                status: 'I am fine!'
+                "name": "merkuriy7",
+                "id": 21306,
+                "uniqueUrlName": null,
+                "photos": {
+                    "small": null,
+                    "large": null
+                },
+                "status": null,
+                "followed": false
             },
             {
-                id: 2,
-                follow: true,
-                name: 'Anton',
-                image: 'https://thumbs.dreamstime.com/b/businessman-icon-image-male-avatar-profile-vector-glasses-beard-hairstyle-179728610.jpg',
-                location: {country: 'Canada', city: 'Calgary'},
-                status: 'Everything is ok!'
+                "name": "darkgoanna",
+                "id": 21305,
+                "uniqueUrlName": null,
+                "photos": {
+                    "small": null,
+                    "large": null
+                },
+                "status": null,
+                "followed": false
             },
             {
-                id: 3,
-                follow: false,
-                name: 'Anna',
-                image: 'https://thumbs.dreamstime.com/b/businessman-icon-image-male-avatar-profile-vector-glasses-beard-hairstyle-179728610.jpg',
-                location: {country: 'USA', city: 'Dallas'},
-                status: 'Life is good!'
+                "name": "ron1888",
+                "id": 21304,
+                "uniqueUrlName": null,
+                "photos": {
+                    "small": null,
+                    "large": null
+                },
+                "status": null,
+                "followed": false
+            },
+            {
+                "name": "butrik",
+                "id": 21303,
+                "uniqueUrlName": null,
+                "photos": {
+                    "small": null,
+                    "large": null
+                },
+                "status": null,
+                "followed": false
             }
         ]
     }
@@ -127,61 +207,101 @@ test('Set new Users', () => {
     let combinedUsers = usersReducer(beginUsers, setUsersAC(addUsers))
 
     expect(beginUsers).toEqual({
-        users: []
+        items: []
     })
     expect(addUsers).toEqual({
-        users: [
+        "items": [
             {
-                id: 1,
-                follow: false,
-                name: 'Alex',
-                image: 'https://thumbs.dreamstime.com/b/businessman-icon-image-male-avatar-profile-vector-glasses-beard-hairstyle-179728610.jpg',
-                location: {country: 'Russia', city: 'Moscow'},
-                status: 'I am fine!'
+                "name": "merkuriy7",
+                "id": 21306,
+                "uniqueUrlName": null,
+                "photos": {
+                    "small": null,
+                    "large": null
+                },
+                "status": null,
+                "followed": false
             },
             {
-                id: 2,
-                follow: true,
-                name: 'Anton',
-                image: 'https://thumbs.dreamstime.com/b/businessman-icon-image-male-avatar-profile-vector-glasses-beard-hairstyle-179728610.jpg',
-                location: {country: 'Canada', city: 'Calgary'},
-                status: 'Everything is ok!'
+                "name": "darkgoanna",
+                "id": 21305,
+                "uniqueUrlName": null,
+                "photos": {
+                    "small": null,
+                    "large": null
+                },
+                "status": null,
+                "followed": false
             },
             {
-                id: 3,
-                follow: false,
-                name: 'Anna',
-                image: 'https://thumbs.dreamstime.com/b/businessman-icon-image-male-avatar-profile-vector-glasses-beard-hairstyle-179728610.jpg',
-                location: {country: 'USA', city: 'Dallas'},
-                status: 'Life is good!'
+                "name": "ron1888",
+                "id": 21304,
+                "uniqueUrlName": null,
+                "photos": {
+                    "small": null,
+                    "large": null
+                },
+                "status": null,
+                "followed": false
+            },
+            {
+                "name": "butrik",
+                "id": 21303,
+                "uniqueUrlName": null,
+                "photos": {
+                    "small": null,
+                    "large": null
+                },
+                "status": null,
+                "followed": false
             }
         ]
     })
     expect(combinedUsers).toEqual({
-        users: [
+        "items": [
             {
-                id: 1,
-                follow: false,
-                name: 'Alex',
-                image: 'https://thumbs.dreamstime.com/b/businessman-icon-image-male-avatar-profile-vector-glasses-beard-hairstyle-179728610.jpg',
-                location: {country: 'Russia', city: 'Moscow'},
-                status: 'I am fine!'
+                "name": "merkuriy7",
+                "id": 21306,
+                "uniqueUrlName": null,
+                "photos": {
+                    "small": null,
+                    "large": null
+                },
+                "status": null,
+                "followed": false
             },
             {
-                id: 2,
-                follow: true,
-                name: 'Anton',
-                image: 'https://thumbs.dreamstime.com/b/businessman-icon-image-male-avatar-profile-vector-glasses-beard-hairstyle-179728610.jpg',
-                location: {country: 'Canada', city: 'Calgary'},
-                status: 'Everything is ok!'
+                "name": "darkgoanna",
+                "id": 21305,
+                "uniqueUrlName": null,
+                "photos": {
+                    "small": null,
+                    "large": null
+                },
+                "status": null,
+                "followed": false
             },
             {
-                id: 3,
-                follow: false,
-                name: 'Anna',
-                image: 'https://thumbs.dreamstime.com/b/businessman-icon-image-male-avatar-profile-vector-glasses-beard-hairstyle-179728610.jpg',
-                location: {country: 'USA', city: 'Dallas'},
-                status: 'Life is good!'
+                "name": "ron1888",
+                "id": 21304,
+                "uniqueUrlName": null,
+                "photos": {
+                    "small": null,
+                    "large": null
+                },
+                "status": null,
+                "followed": false
+            },
+            {
+                "name": "butrik",
+                "id": 21303,
+                "uniqueUrlName": null,
+                "photos": {
+                    "small": null,
+                    "large": null
+                },
+                "status": null,
+                "followed": false
             }
         ]
     })
