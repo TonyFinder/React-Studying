@@ -8,8 +8,7 @@ import {UsersPagePropsType} from '../../Redux/users_reducer';
 
 // Здесь используем классовый компонент, смотреть урок 53
 export class Users extends React.Component<UsersPropsType, UsersPagePropsType> {
-    constructor(props: UsersPropsType) {
-        super(props);
+    componentDidMount() {
         axios
             .get<any>('https://social-network.samuraijs.com/api/1.0/users')
             .then((response: AxiosResponse) => this.props.setUsersHandler(response.data))
