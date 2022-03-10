@@ -40,3 +40,6 @@
 .status {
     font-style: italic;
 }
+.boldText {
+    font-weight: bold;
+}
