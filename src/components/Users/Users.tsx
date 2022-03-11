@@ -3,6 +3,7 @@ import styles from './Users.module.css';
 import userPhoto from '../../Assets/Images/user.jpg';
 import {UsersPagePropsType} from '../../Redux/users_reducer';
 
+
 type UsersPresentationPropsType = {
     totalUsersCount: number
     pageSize: number
