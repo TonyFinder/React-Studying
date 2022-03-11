@@ -2,5 +2,5 @@ import React from 'react';
 import loading from '../../../Assets/Images/loading.svg';
 
 export const Loading = () => {
-    return <img src={loading}/>
+    return <img src={loading} alt={"Loader"}/>
 }

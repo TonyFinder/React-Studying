@@ -15,17 +15,17 @@ const initialUsersState = {
     pageSize: 100,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: false
+    isFetch: false
 }
 
 export type UsersPagePropsType = typeof initialUsersState
 
-export const followAC = (userID: number) => ({type: "FOLLOW", userID: userID} as const)
-export const setUsersAC = (items: UsersPagePropsType) => ({type: "SET-USERS", items: items} as const)
-export const setCurrentPageAC = (currentPage: number) => ({type: "SET-CURRENT-PAGE", currentPage} as const)
-export const setTotalUsersCountAC = (totalUsersCount: number) => ({type: "SET-TOTAL-USERS-COUNT", totalUsersCount} as const)
-export const isFetchingAC = (isFetching: boolean) => ({type: "FETCHING-ACTIVATE", isFetching} as const)
-export type ActionUsersPropsType = ReturnType<typeof followAC> | ReturnType<typeof setUsersAC> | ReturnType<typeof setCurrentPageAC> | ReturnType<typeof setTotalUsersCountAC> | ReturnType<typeof isFetchingAC>
+export const follow = (userID: number) => ({type: "FOLLOW", userID: userID} as const)
+export const setUsers = (items: UsersPagePropsType) => ({type: "SET-USERS", items: items} as const)
+export const setCurrentPage = (currentPage: number) => ({type: "SET-CURRENT-PAGE", currentPage} as const)
+export const setTotalUsersCount = (totalUsersCount: number) => ({type: "SET-TOTAL-USERS-COUNT", totalUsersCount} as const)
+export const isFetching = (isFetch: boolean) => ({type: "FETCHING-ACTIVATE", isFetch} as const)
+export type ActionUsersPropsType = ReturnType<typeof follow> | ReturnType<typeof setUsers> | ReturnType<typeof setCurrentPage> | ReturnType<typeof setTotalUsersCount> | ReturnType<typeof isFetching>
 
 export const usersReducer = (state: UsersPagePropsType = initialUsersState, action: ActionUsersPropsType): UsersPagePropsType => {
     switch (action.type) {
@@ -38,7 +38,7 @@ export const usersReducer = (state: UsersPagePropsType = initialUsersState, acti
         case 'SET-TOTAL-USERS-COUNT':
             return {...state, totalUsersCount: action.totalUsersCount}
         case 'FETCHING-ACTIVATE':
-            return {...state, isFetching: action.isFetching}
+            return {...state, isFetch: action.isFetch}
         default:
             return state
     }
