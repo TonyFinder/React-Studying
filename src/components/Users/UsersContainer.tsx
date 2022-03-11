@@ -9,6 +9,8 @@ import {
     setUsersAC,
     UsersPagePropsType
 } from '../../Redux/users_reducer';
+import React from 'react';
+import axios, {AxiosResponse} from 'axios';
 
 export type MapStateToPropsType = {
     usersPage: UsersPagePropsType
@@ -23,6 +25,34 @@ export type MapDispatchToPropsType = {
     setTotalUsersCount: (totalUsersCount: number) => void
 }
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
+
+// Здесь используем классовый компонент, смотреть урок 53
+export class UsersAPI extends React.Component<UsersPropsType, UsersPagePropsType> {
+    componentDidMount() {
+        axios
+            .get<any>(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`)
+            .then((response: AxiosResponse) => {
+                this.props.setUsersHandler(response.data)
+                this.props.setTotalUsersCount(response.data.totalCount)
+            })
+    }
+    setCurrentPage = (currentPage: number) => {
+        this.props.setCurrentPage(currentPage)
+        axios
+            .get<any>(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${currentPage}`)
+            .then((response: AxiosResponse) => this.props.setUsersHandler(response.data))
+    }
+
+    render() {
+        return <Users usersPage={this.props.usersPage}
+                      currentPage={this.props.currentPage}
+                      pageSize={this.props.pageSize}
+                      totalUsersCount={this.props.totalUsersCount}
+                      setCurrentPage={this.setCurrentPage}
+                      followClick={this.props.followClick}
+        />
+    }
+}
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
@@ -42,4 +72,4 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users)
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPI)
