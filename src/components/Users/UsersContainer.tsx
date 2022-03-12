@@ -13,14 +13,14 @@ import React from 'react';
 import axios, {AxiosResponse} from 'axios';
 import {Loading} from '../common/Loading/Loading';
 
-export type MapStateToPropsType = {
+type MapStateToPropsType = {
     usersPage: UsersPagePropsType
     pageSize: number
     totalUsersCount: number
     currentPage: number
     isFetch: boolean
 }
-export type MapDispatchToPropsType = {
+type MapDispatchToPropsType = {
     follow: (userId: number) => void
     setUsers: (users: UsersPagePropsType) => void
     setCurrentPage: (users: number) => void

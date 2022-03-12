@@ -1,7 +1,14 @@
 .description {
     padding: 10px;
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
-
+.description img {
+    width: 150px;
+    height: 150px;
+}
 .image img {
     width: 250px;
     height: 250px;

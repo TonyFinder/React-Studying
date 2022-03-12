@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './Users.module.css';
 import userPhoto from '../../Assets/Images/user.jpg';
 import {UsersPagePropsType} from '../../Redux/users_reducer';
+import { NavLink } from 'react-router-dom';
 
 
 type UsersPresentationPropsType = {
@@ -25,9 +26,12 @@ export const Users = (props: UsersPresentationPropsType) => {
             <div className={styles.main}>
                 {props.usersPage.items.map(m =>
                     <div className={styles.usersBlocks}>
-                        <div className={styles.imageBlock}>
-                            <img src={m.photos.small !== null ? m.photos.small : userPhoto} className={styles.image}
-                                 alt={'User avatar'}/>
+                        <div key={m.id} className={styles.imageBlock}>
+                            {/*Ссылка на страницу Profile*/}
+                            <NavLink to={`/profile/${m.id}`}>
+                                <img src={m.photos.small !== null ? m.photos.small : userPhoto} className={styles.image}
+                                     alt={'User avatar'}/>
+                            </NavLink>
                             <button
                                 onClick={() => props.followClick(m.id)}>{m.followed ? 'Follow' : 'Unfollow'}</button>
                         </div>

@@ -1,4 +1,4 @@
-import {addPostAC, newPostTextAC, ProfilePagePropsType} from '../../../Redux/profile_reducer';
+import {addPost, newPostText, ProfilePagePropsType} from '../../../Redux/profile_reducer';
 import MyPosts from './MyPosts';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../../Redux/redux-store';
@@ -21,10 +21,10 @@ let MapToStateProps = (state: AppStateType): MapToStatePropsType => {
 let MapToDispatchProps = (dispatch: Dispatch) => {
     return {
         addPost: () => {
-            dispatch(addPostAC())
+            dispatch(addPost())
         },
         onChangeTextareaMessage: (message: string) => {
-            dispatch(newPostTextAC(message))
+            dispatch(newPostText(message))
         }
     }
 }
