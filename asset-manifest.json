@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/React-Samurai/static/css/main.7dfbe020.chunk.css",
-    "main.js": "/React-Samurai/static/js/main.1d39b536.chunk.js",
-    "main.js.map": "/React-Samurai/static/js/main.1d39b536.chunk.js.map",
+    "main.js": "/React-Samurai/static/js/main.6cf2344f.chunk.js",
+    "main.js.map": "/React-Samurai/static/js/main.6cf2344f.chunk.js.map",
     "runtime-main.js": "/React-Samurai/static/js/runtime-main.9afb2bac.js",
     "runtime-main.js.map": "/React-Samurai/static/js/runtime-main.9afb2bac.js.map",
-    "static/js/2.f39db55d.chunk.js": "/React-Samurai/static/js/2.f39db55d.chunk.js",
-    "static/js/2.f39db55d.chunk.js.map": "/React-Samurai/static/js/2.f39db55d.chunk.js.map",
+    "static/js/2.2d711646.chunk.js": "/React-Samurai/static/js/2.2d711646.chunk.js",
+    "static/js/2.2d711646.chunk.js.map": "/React-Samurai/static/js/2.2d711646.chunk.js.map",
     "index.html": "/React-Samurai/index.html",
     "static/css/main.7dfbe020.chunk.css.map": "/React-Samurai/static/css/main.7dfbe020.chunk.css.map",
-    "static/js/2.f39db55d.chunk.js.LICENSE.txt": "/React-Samurai/static/js/2.f39db55d.chunk.js.LICENSE.txt",
+    "static/js/2.2d711646.chunk.js.LICENSE.txt": "/React-Samurai/static/js/2.2d711646.chunk.js.LICENSE.txt",
     "static/media/loading.eead7a9e.svg": "/React-Samurai/static/media/loading.eead7a9e.svg",
     "static/media/user.b8565c71.jpg": "/React-Samurai/static/media/user.b8565c71.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.9afb2bac.js",
-    "static/js/2.f39db55d.chunk.js",
+    "static/js/2.2d711646.chunk.js",
     "static/css/main.7dfbe020.chunk.css",
-    "static/js/main.1d39b536.chunk.js"
+    "static/js/main.6cf2344f.chunk.js"
   ]
 }
