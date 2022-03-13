@@ -25,8 +25,8 @@ export const Users = (props: UsersPresentationPropsType) => {
             }
             <div className={styles.main}>
                 {props.usersPage.items.map(m =>
-                    <div className={styles.usersBlocks}>
-                        <div key={m.id} className={styles.imageBlock}>
+                    <div className={styles.usersBlocks} key={m.id}>
+                        <div className={styles.imageBlock}>
                             {/*Ссылка на страницу Profile*/}
                             <NavLink to={`/profile/${m.id}`}>
                                 <img src={m.photos.small !== null ? m.photos.small : userPhoto} className={styles.image}

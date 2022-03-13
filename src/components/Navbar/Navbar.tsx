@@ -11,22 +11,22 @@ const Navbar = (props: NavbarPropsType) => {
     return (
         <nav className={n.navi}>
             <div className={n.item}>
-                <NavLink to="/profile" activeClassName={n.active}>Profile</NavLink>
+                <NavLink to="/profile/16306" style={(param) => ({color: param.isActive ? "black" : "white"})}>Profile</NavLink>
             </div>
             <div className={`${n.item} ${n.active}`}>
-                <NavLink to="/dialogs" activeClassName={n.active}>Messages</NavLink>
+                <NavLink to="/dialogs" style={(param) => ({color: param.isActive ? "black" : "white"})}>Messages</NavLink>
             </div>
             <div className={n.item}>
-                <NavLink to="/users" activeClassName={n.active}>Users</NavLink>
+                <NavLink to="/users" style={(param) => ({color: param.isActive ? "black" : "white"})}>Users</NavLink>
             </div>
             <div className={n.item}>
-                <NavLink to="/news" activeClassName={n.active}>News</NavLink>
+                <NavLink to="/news" style={(param) => ({color: param.isActive ? "black" : "white"})}>News</NavLink>
             </div>
             <div className={n.item}>
-                <NavLink to="music" activeClassName={n.active}>Music</NavLink>
+                <NavLink to="/music" style={(param) => ({color: param.isActive ? "black" : "white"})}>Music</NavLink>
             </div>
             <div className={n.item}>
-                <NavLink to="settings" activeClassName={n.active}>Settings</NavLink>
+                <NavLink to="/settings" style={(param) => ({color: param.isActive ? "black" : "white"})}>Settings</NavLink>
             </div>
             <div className={`${n.friends} ${n.friendsText}`}>
                 <span className={n.header}>Friends</span>
