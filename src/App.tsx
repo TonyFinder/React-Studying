@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Settings from './components/Settings/Settings';
 import Music from './components/Music/Music';
@@ -10,6 +9,7 @@ import DialogsContainer from './components/Dialogs/DialogsContainer';
 import {UsersContainer} from './components/Users/UsersContainer';
 import {ProfileContainer} from './components/Profile/ProfileContainer';
 import {Route, Routes} from 'react-router-dom';
+import {HeaderContainer} from './components/Header/HeaderContainer';
 
 type AppProps = {
     sitebar: SitebarPropsType
@@ -18,7 +18,7 @@ type AppProps = {
 const App = (props: AppProps) => {
     return (
         <div className="app-wrapper">
-            <Header/>
+            <HeaderContainer/>
             <Navbar sitebar={props.sitebar}/>
             <div className="app-wrapper-content">
                 <Routes>

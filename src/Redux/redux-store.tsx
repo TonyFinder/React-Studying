@@ -3,12 +3,14 @@ import {dialogReducer} from './dialogs_reducer';
 import {profileReducer} from './profile_reducer';
 import {sitebarReducer} from './sitebar_reducer';
 import {usersReducer} from './users_reducer';
+import {authReducer} from './auth_reducer';
 
 export const rootReducers = combineReducers ({
     dialogsPage: dialogReducer,
     profilePage: profileReducer,
     sitebar: sitebarReducer,
-    usersPage: usersReducer
+    usersPage: usersReducer,
+    auth: authReducer
 })
 
 // Типизация стейта автоматическая.
