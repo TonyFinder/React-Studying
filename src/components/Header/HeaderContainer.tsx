@@ -8,8 +8,13 @@ import {connect} from 'react-redux';
 class HeaderAPI extends React.Component<AuthPropsType, AuthLoginStatePropsType> {
     componentDidMount() {
         axios
-            .get('https://social-network.samuraijs.com/api/1.0/auth/me',
-                {withCredentials: true})
+            .get<any>('https://social-network.samuraijs.com/api/1.0/auth/me',
+                {
+                    withCredentials: true,
+                    headers: {
+                        'API-KEY': '7c15e34d-028e-4653-86ec-6c53c32699db'
+                    }
+                })
             .then((response: AxiosResponse) => {
                 if (response.data.resultCode === 0) {
                     this.props.setAuthUserData(response.data.data)

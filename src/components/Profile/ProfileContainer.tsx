@@ -45,7 +45,13 @@ class ProfileAPI extends React.Component<ProfileMainPropsType, ProfilePropsType>
         if (userID === 1) userID = 2
         this.props.changeLoader(true)
         axios
-            .get(`https://social-network.samuraijs.com/api/1.0/profile/` + userID)
+            .get(`https://social-network.samuraijs.com/api/1.0/profile/` + userID,
+                {
+                    withCredentials: true,
+                    headers: {
+                        'API-KEY': '7c15e34d-028e-4653-86ec-6c53c32699db'
+                    }
+                })
             .then((response: AxiosResponse) => {
                 this.props.changeLoader(false)
                 this.props.setProfile(response.data)

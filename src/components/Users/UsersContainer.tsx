@@ -34,7 +34,13 @@ export class UsersAPI extends React.Component<UsersPropsType, UsersPagePropsType
     componentDidMount() {
         this.props.isFetching(true)
         axios
-            .get<any>(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`)
+            .get<any>(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`,
+                {
+                    withCredentials: true,
+                    headers: {
+                        'API-KEY': '7c15e34d-028e-4653-86ec-6c53c32699db'
+                    }
+                })
             .then((response: AxiosResponse) => {
                 this.props.isFetching(false)
                 this.props.setUsers(response.data)
@@ -46,7 +52,13 @@ export class UsersAPI extends React.Component<UsersPropsType, UsersPagePropsType
         this.props.isFetching(true)
         this.props.setCurrentPage(currentPage)
         axios
-            .get<any>(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${currentPage}`)
+            .get<any>(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${currentPage}`,
+                {
+                    withCredentials: true,
+                    headers: {
+                        'API-KEY': '7c15e34d-028e-4653-86ec-6c53c32699db'
+                    }
+                })
             .then((response: AxiosResponse) => {
                 this.props.isFetching(false)
                 this.props.setUsers(response.data)
