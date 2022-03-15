@@ -1,3 +1,7 @@
+import {AnyAction} from 'redux'
+import {ThunkDispatch} from 'redux-thunk'
+import {followAPI, usersAPI} from '../api/api';
+
 export type UsersPropsType = {
     name: string
     id: number
@@ -24,9 +28,16 @@ export type UsersPagePropsType = typeof initialUsersState
 export const follow = (userID: number) => ({type: 'FOLLOW', userID: userID} as const)
 export const setUsers = (items: UsersPagePropsType) => ({type: 'SET-USERS', items: items} as const)
 export const setCurrentPage = (currentPage: number) => ({type: 'SET-CURRENT-PAGE', currentPage} as const)
-export const setTotalUsersCount = (totalUsersCount: number) => ({type: 'SET-TOTAL-USERS-COUNT', totalUsersCount} as const)
+export const setTotalUsersCount = (totalUsersCount: number) => ({
+    type: 'SET-TOTAL-USERS-COUNT',
+    totalUsersCount
+} as const)
 export const isFetching = (isFetch: boolean) => ({type: 'FETCHING-ACTIVATE', isFetch} as const)
-export const toggleDisableButton = (isFetching: boolean, userID: number) => ({type: 'TOGGLE-DISABLE-BUTTON', isFetching, userID} as const)
+export const toggleDisableButton = (isFetching: boolean, userID: number) => ({
+    type: 'TOGGLE-DISABLE-BUTTON',
+    isFetching,
+    userID
+} as const)
 export type ActionUsersPropsType =
     ReturnType<typeof follow>
     | ReturnType<typeof setUsers>
@@ -34,6 +45,45 @@ export type ActionUsersPropsType =
     | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof isFetching>
     | ReturnType<typeof toggleDisableButton>
+
+export const getUsersTC = (pageSize: number, currentPage: number) => {
+    return (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+        dispatch(isFetching(true))
+        usersAPI.getUsers(pageSize, currentPage)
+            .then(data => {
+                dispatch(isFetching(false))
+                dispatch(setUsers(data))
+                dispatch(setTotalUsersCount(data.totalCount))
+            })
+    }
+}
+export const setCurrentPageForUsersTC = (pageSize: number, currentPage: number) => {
+    return (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+        dispatch(isFetching(true))
+        dispatch(setCurrentPage(currentPage))
+        usersAPI.getUsers(pageSize, currentPage)
+            .then(data => {
+                dispatch(isFetching(false))
+                dispatch(setUsers(data))
+            })
+    }
+}
+export const followButtonTC = (userID: number, followed: boolean) => {
+    return (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+        dispatch(toggleDisableButton(true, userID))
+        followed
+            ? followAPI.unFollowUser(userID)
+                .then(data => {
+                    if (data.resultCode === 0) dispatch(follow(userID))
+                    dispatch(toggleDisableButton(false, userID))
+                })
+            : followAPI.followUser(userID)
+                .then(data => {
+                    if (data.resultCode === 0) dispatch(follow(userID))
+                    dispatch(toggleDisableButton(false, userID))
+                })
+    }
+}
 
 export const usersReducer = (state: UsersPagePropsType = initialUsersState, action: ActionUsersPropsType): UsersPagePropsType => {
     switch (action.type) {

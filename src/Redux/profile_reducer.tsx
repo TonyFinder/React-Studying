@@ -1,3 +1,7 @@
+import {ThunkDispatch} from 'redux-thunk';
+import {AnyAction} from 'redux';
+import {profileAPI} from '../api/api';
+
 export type ProfilePropsType = {
     aboutMe: string
     contacts: {
@@ -67,6 +71,17 @@ export const setProfile = (profile: ProfilePropsType) => ({type: 'SET-PROFILE', 
 export const changeLoader = (isFetching: boolean) => ({type: 'CHANGE-LOADER', isFetching} as const)
 
 export type ActionProfilePropsType = ReturnType<typeof addPost> | ReturnType<typeof newPostText> | ReturnType<typeof setProfile> | ReturnType<typeof changeLoader>
+
+export const setProfileTC = (userID: number) => {
+    return (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+        dispatch(changeLoader(true))
+        profileAPI.getProfile(userID)
+            .then(data => {
+                dispatch(changeLoader(false))
+                dispatch(setProfile(data))
+            })
+    }
+}
 
 export const profileReducer = (state: ProfilePagePropsType = initialState, action: ActionProfilePropsType): ProfilePagePropsType => {
     switch (action.type) {

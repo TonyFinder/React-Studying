@@ -2,16 +2,14 @@ import {connect} from 'react-redux';
 import {Users} from './Users';
 import {AppStateType} from '../../Redux/redux-store';
 import {
-    follow,
-    isFetching,
+    followButtonTC,
+    getUsersTC,
     setCurrentPage,
-    setTotalUsersCount,
-    setUsers, toggleDisableButton,
+    setCurrentPageForUsersTC,
     UsersPagePropsType
 } from '../../Redux/users_reducer';
 import React from 'react';
 import {Loading} from '../common/Loading/Loading';
-import {usersAPI} from '../../api/api';
 
 type MapStateToPropsType = {
     usersPage: UsersPagePropsType
@@ -22,36 +20,16 @@ type MapStateToPropsType = {
     toggledButton: number[]
 }
 type MapDispatchToPropsType = {
-    follow: (userId: number) => void
-    setUsers: (users: UsersPagePropsType) => void
-    setCurrentPage: (users: number) => void
-    setTotalUsersCount: (totalUsersCount: number) => void
-    isFetching: (isFetching: boolean) => void
-    toggleDisableButton: (isFetching: boolean, userID: number) => void
+    getUsersTC: (pageSize: number, currentPage: number) => void
+    setCurrentPageForUsersTC: (pageSize: number, currentPage: number) => void
+    followButtonTC: (userID: number, followed: boolean) => void
 }
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 // Здесь используем классовый компонент, смотреть урок 53
 export class UsersAPI extends React.Component<UsersPropsType, UsersPagePropsType> {
-    componentDidMount() {
-        this.props.isFetching(true)
-        usersAPI.getUsers(this.props.pageSize, this.props.currentPage)
-            .then(data => {
-                this.props.isFetching(false)
-                this.props.setUsers(data)
-                this.props.setTotalUsersCount(data.totalCount)
-            })
-    }
-
-    setCurrentPage = (currentPage: number) => {
-        this.props.isFetching(true)
-        this.props.setCurrentPage(currentPage)
-        usersAPI.getUsers(this.props.pageSize, currentPage)
-            .then(data => {
-                this.props.isFetching(false)
-                this.props.setUsers(data)
-            })
-    }
+    componentDidMount() {this.props.getUsersTC(this.props.pageSize, this.props.currentPage)}
+    setCurrentPage = (currentPage: number) => {this.props.setCurrentPageForUsersTC(this.props.pageSize, currentPage)}
 
     render() {
         return !this.props.isFetch
@@ -61,8 +39,8 @@ export class UsersAPI extends React.Component<UsersPropsType, UsersPagePropsType
                      totalUsersCount={this.props.totalUsersCount}
                      setCurrentPage={this.setCurrentPage}
                      toggledButton={this.props.toggledButton}
-                     toggleDisableButton={this.props.toggleDisableButton}
-                     followClick={this.props.follow}/>
+                     followButtonTC={this.props.followButtonTC}
+            />
             : <Loading/>
     }
 }
@@ -79,10 +57,8 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 }
 
 export const UsersContainer = connect(mapStateToProps, {
-    follow,
-    setUsers,
     setCurrentPage,
-    setTotalUsersCount,
-    isFetching,
-    toggleDisableButton
+    getUsersTC,
+    setCurrentPageForUsersTC,
+    followButtonTC
 })(UsersAPI)

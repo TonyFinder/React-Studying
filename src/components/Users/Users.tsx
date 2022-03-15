@@ -3,7 +3,6 @@ import styles from './Users.module.css';
 import userPhoto from '../../Assets/Images/user.jpg';
 import {UsersPagePropsType} from '../../Redux/users_reducer';
 import {NavLink} from 'react-router-dom';
-import {followAPI} from '../../api/api';
 
 
 type UsersPresentationPropsType = {
@@ -13,8 +12,7 @@ type UsersPresentationPropsType = {
     toggledButton: number[]
     usersPage: UsersPagePropsType
     setCurrentPage: (page: number) => void
-    followClick: (id: number) => void
-    toggleDisableButton: (isFetching: boolean, userID: number) => void
+    followButtonTC: (userID: number, followed: boolean) => void
 }
 
 export const Users = (props: UsersPresentationPropsType) => {
@@ -37,29 +35,9 @@ export const Users = (props: UsersPresentationPropsType) => {
                                 <img src={m.photos.small !== null ? m.photos.small : userPhoto} className={styles.image}
                                      alt={'User avatar'}/>
                             </NavLink>
-                            <button
-                                disabled={props.toggledButton.some(id => id === m.id)}
-                                onClick={() => {
-                                    if (m.followed) {
-                                        props.toggleDisableButton(true, m.id)
-                                        followAPI.unFollowUser(m.id)
-                                            .then(data => {
-                                                console.log('DELETE')
-                                                if (data.resultCode === 0) props.followClick(m.id)
-                                                props.toggleDisableButton(false, m.id)
-                                            })
-
-                                    } else {
-                                        props.toggleDisableButton(true, m.id)
-                                        followAPI.followUser(m.id)
-                                            .then(data => {
-                                                console.log('POST')
-                                                if (data.resultCode === 0) props.followClick(m.id)
-                                                props.toggleDisableButton(false, m.id)
-                                            })
-
-                                    }
-                                }}>{m.followed ? 'Follow' : 'Unfollow'}
+                            <button disabled={props.toggledButton.some(id => id === m.id)}
+                                    onClick={() => props.followButtonTC(m.id, m.followed)}>
+                                {m.followed ? 'Follow' : 'Unfollow'}
                             </button>
                         </div>
                         <div className={styles.rightField}>

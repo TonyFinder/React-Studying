@@ -31,3 +31,9 @@ export const profileAPI = {
             .then((response: AxiosResponse) => response.data)
     }
 }
+export const authAPI = {
+    authMe() {
+        return instance.get<any>(`auth/me`)
+            .then((response: AxiosResponse) => response.data)
+    }
+}
