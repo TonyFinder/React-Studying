@@ -10,8 +10,8 @@ import {
     UsersPagePropsType
 } from '../../Redux/users_reducer';
 import React from 'react';
-import axios, {AxiosResponse} from 'axios';
 import {Loading} from '../common/Loading/Loading';
+import {usersAPI} from '../../api/api';
 
 type MapStateToPropsType = {
     usersPage: UsersPagePropsType
@@ -33,35 +33,21 @@ export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 export class UsersAPI extends React.Component<UsersPropsType, UsersPagePropsType> {
     componentDidMount() {
         this.props.isFetching(true)
-        axios
-            .get<any>(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`,
-                {
-                    withCredentials: true,
-                    headers: {
-                        'API-KEY': '7c15e34d-028e-4653-86ec-6c53c32699db'
-                    }
-                })
-            .then((response: AxiosResponse) => {
+        usersAPI.getUsers(this.props.pageSize, this.props.currentPage)
+            .then(data => {
                 this.props.isFetching(false)
-                this.props.setUsers(response.data)
-                this.props.setTotalUsersCount(response.data.totalCount)
+                this.props.setUsers(data)
+                this.props.setTotalUsersCount(data.totalCount)
             })
     }
 
     setCurrentPage = (currentPage: number) => {
         this.props.isFetching(true)
         this.props.setCurrentPage(currentPage)
-        axios
-            .get<any>(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${currentPage}`,
-                {
-                    withCredentials: true,
-                    headers: {
-                        'API-KEY': '7c15e34d-028e-4653-86ec-6c53c32699db'
-                    }
-                })
-            .then((response: AxiosResponse) => {
+        usersAPI.getUsers(this.props.pageSize, currentPage)
+            .then(data => {
                 this.props.isFetching(false)
-                this.props.setUsers(response.data)
+                this.props.setUsers(data)
             })
     }
 
@@ -87,4 +73,10 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, {follow, setUsers, setCurrentPage, setTotalUsersCount, isFetching})(UsersAPI)
+export const UsersContainer = connect(mapStateToProps, {
+    follow,
+    setUsers,
+    setCurrentPage,
+    setTotalUsersCount,
+    isFetching
+})(UsersAPI)

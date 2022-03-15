@@ -3,7 +3,7 @@ import styles from './Users.module.css';
 import userPhoto from '../../Assets/Images/user.jpg';
 import {UsersPagePropsType} from '../../Redux/users_reducer';
 import {NavLink} from 'react-router-dom';
-import axios, {AxiosResponse} from 'axios';
+import {followAPI} from '../../api/api';
 
 
 type UsersPresentationPropsType = {
@@ -38,33 +38,17 @@ export const Users = (props: UsersPresentationPropsType) => {
                             <button
                                 onClick={() => {
                                     if (m.followed) {
-                                        axios
-                                            .delete<any>(`https://social-network.samuraijs.com/api/1.0/follow/${m.id}`,
-                                                {
-                                                    withCredentials: true,
-                                                    headers: {
-                                                        'API-KEY': '7c15e34d-028e-4653-86ec-6c53c32699db'
-                                                    }
-                                                })
-                                            .then((response: AxiosResponse) => {
-                                                console.log("DELETE")
-                                                if (response.data.resultCode === 0) props.followClick(m.id)
+                                        followAPI.unFollowUser(m.id)
+                                            .then(data => {
+                                                console.log('DELETE')
+                                                if (data.resultCode === 0) props.followClick(m.id)
                                             })
-                                            .catch((error: AxiosResponse) => console.log("Error button", error))
                                     } else {
-                                        axios
-                                            .post<any>(`https://social-network.samuraijs.com/api/1.0/follow/${m.id}`, {},
-                                                {
-                                                    withCredentials: true,
-                                                    headers: {
-                                                        'API-KEY': '7c15e34d-028e-4653-86ec-6c53c32699db'
-                                                    }
-                                                })
-                                            .then((response: AxiosResponse) => {
-                                                console.log("POST")
-                                                if (response.data.resultCode === 0) props.followClick(m.id)
+                                        followAPI.followUser(m.id)
+                                            .then(data => {
+                                                console.log('POST')
+                                                if (data.resultCode === 0) props.followClick(m.id)
                                             })
-                                            .catch((error: AxiosResponse) => console.log("Error button", error))
                                     }
                                 }}>{m.followed ? 'Follow' : 'Unfollow'}
                             </button>

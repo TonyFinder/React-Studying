@@ -1,14 +1,10 @@
 import React from 'react';
 import Profile from './Profile';
-import axios, {AxiosResponse} from 'axios';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../Redux/redux-store';
 import {changeLoader, ProfilePropsType, setProfile} from '../../Redux/profile_reducer';
-import {
-    useLocation,
-    useNavigate,
-    useParams,
-} from "react-router-dom";
+import {useLocation, useNavigate, useParams,} from 'react-router-dom';
+import {profileAPI} from '../../api/api';
 
 type MapStateToPropsType = {
     profilePage: ProfilePropsType
@@ -44,17 +40,10 @@ class ProfileAPI extends React.Component<ProfileMainPropsType, ProfilePropsType>
         let userID = this.props.router.params.id
         if (userID === 1) userID = 2
         this.props.changeLoader(true)
-        axios
-            .get(`https://social-network.samuraijs.com/api/1.0/profile/` + userID,
-                {
-                    withCredentials: true,
-                    headers: {
-                        'API-KEY': '7c15e34d-028e-4653-86ec-6c53c32699db'
-                    }
-                })
-            .then((response: AxiosResponse) => {
+        profileAPI.getProfile(userID)
+            .then(data => {
                 this.props.changeLoader(false)
-                this.props.setProfile(response.data)
+                this.props.setProfile(data)
             })
     }
 
