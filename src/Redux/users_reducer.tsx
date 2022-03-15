@@ -46,30 +46,25 @@ export type ActionUsersPropsType =
     | ReturnType<typeof isFetching>
     | ReturnType<typeof toggleDisableButton>
 
-export const getUsersTC = (pageSize: number, currentPage: number) => {
-    return (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
-        dispatch(isFetching(true))
-        usersAPI.getUsers(pageSize, currentPage)
-            .then(data => {
-                dispatch(isFetching(false))
-                dispatch(setUsers(data))
-                dispatch(setTotalUsersCount(data.totalCount))
-            })
-    }
+export const getUsersTC = (pageSize: number, currentPage: number) => (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+    dispatch(isFetching(true))
+    usersAPI.getUsers(pageSize, currentPage)
+        .then(data => {
+            dispatch(isFetching(false))
+            dispatch(setUsers(data))
+            dispatch(setTotalUsersCount(data.totalCount))
+        })
 }
-export const setCurrentPageForUsersTC = (pageSize: number, currentPage: number) => {
-    return (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
-        dispatch(isFetching(true))
-        dispatch(setCurrentPage(currentPage))
-        usersAPI.getUsers(pageSize, currentPage)
-            .then(data => {
-                dispatch(isFetching(false))
-                dispatch(setUsers(data))
-            })
-    }
+export const setCurrentPageForUsersTC = (pageSize: number, currentPage: number) => (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+    dispatch(isFetching(true))
+    dispatch(setCurrentPage(currentPage))
+    usersAPI.getUsers(pageSize, currentPage)
+        .then(data => {
+            dispatch(isFetching(false))
+            dispatch(setUsers(data))
+        })
 }
-export const followButtonTC = (userID: number, followed: boolean) => {
-    return (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+export const followButtonTC = (userID: number, followed: boolean) => (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
         dispatch(toggleDisableButton(true, userID))
         followed
             ? followAPI.unFollowUser(userID)
@@ -83,7 +78,6 @@ export const followButtonTC = (userID: number, followed: boolean) => {
                     dispatch(toggleDisableButton(false, userID))
                 })
     }
-}
 
 export const usersReducer = (state: UsersPagePropsType = initialUsersState, action: ActionUsersPropsType): UsersPagePropsType => {
     switch (action.type) {

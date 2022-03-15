@@ -28,21 +28,19 @@ export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 // Здесь используем классовый компонент, смотреть урок 53
 export class UsersAPI extends React.Component<UsersPropsType, UsersPagePropsType> {
-    componentDidMount() {this.props.getUsersTC(this.props.pageSize, this.props.currentPage)}
-    setCurrentPage = (currentPage: number) => {this.props.setCurrentPageForUsersTC(this.props.pageSize, currentPage)}
+    componentDidMount = () => this.props.getUsersTC(this.props.pageSize, this.props.currentPage)
+    setCurrentPage = (currentPage: number) => this.props.setCurrentPageForUsersTC(this.props.pageSize, currentPage)
 
-    render() {
-        return !this.props.isFetch
-            ? <Users usersPage={this.props.usersPage}
-                     currentPage={this.props.currentPage}
-                     pageSize={this.props.pageSize}
-                     totalUsersCount={this.props.totalUsersCount}
-                     setCurrentPage={this.setCurrentPage}
-                     toggledButton={this.props.toggledButton}
-                     followButtonTC={this.props.followButtonTC}
-            />
-            : <Loading/>
-    }
+    render = () => !this.props.isFetch
+        ? <Users usersPage={this.props.usersPage}
+                 currentPage={this.props.currentPage}
+                 pageSize={this.props.pageSize}
+                 totalUsersCount={this.props.totalUsersCount}
+                 setCurrentPage={this.setCurrentPage}
+                 toggledButton={this.props.toggledButton}
+                 followButtonTC={this.props.followButtonTC}
+        />
+        : <Loading/>
 }
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => {

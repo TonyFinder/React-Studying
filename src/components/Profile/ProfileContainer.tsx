@@ -34,15 +34,12 @@ function withRouter(Component: any) {
 }
 
 class ProfileAPI extends React.Component<ProfileMainPropsType, ProfilePropsType>{
-    componentDidMount() {
+    componentDidMount = () => {
         let userID = this.props.router.params.id
         if (userID === 1) userID = 2
         this.props.setProfileTC(userID)
     }
-
-    render() {
-        return <Profile profilePage={this.props.profilePage} isFetching={this.props.isFetching}/>
-    }
+    render = () => <Profile profilePage={this.props.profilePage} isFetching={this.props.isFetching}/>
 }
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => {

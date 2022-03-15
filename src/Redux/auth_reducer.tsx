@@ -14,13 +14,11 @@ export const setAuthUserData = (data: AuthLoginStatePropsType) => ({type: 'SET-U
 
 export type ActionAuthPropsType = ReturnType<typeof setAuthUserData>
 
-export const setAuthUserTC = () => {
-    return (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+export const setAuthUserTC = () => (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
         authAPI.authMe().then(data => {
             if (data.resultCode === 0) dispatch(setAuthUserData(data.data))
         })
     }
-}
 
 export const authReducer = (state: AuthLoginStatePropsType = initialState, action: ActionAuthPropsType): AuthLoginStatePropsType => {
     switch (action.type) {

@@ -5,10 +5,8 @@ import {AuthLoginStatePropsType, setAuthUserTC} from '../../Redux/auth_reducer';
 import {connect} from 'react-redux';
 
 class HeaderAPI extends React.Component<AuthPropsType, AuthLoginStatePropsType> {
-    componentDidMount() {this.props.setAuthUserTC()}
-    render() {
-        return <Header {...this.props}/>
-    }
+    componentDidMount = () => this.props.setAuthUserTC()
+    render = () => <Header {...this.props}/>
 }
 
 type MapDispatchToProps = {

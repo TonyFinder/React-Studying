@@ -72,8 +72,7 @@ export const changeLoader = (isFetching: boolean) => ({type: 'CHANGE-LOADER', is
 
 export type ActionProfilePropsType = ReturnType<typeof addPost> | ReturnType<typeof newPostText> | ReturnType<typeof setProfile> | ReturnType<typeof changeLoader>
 
-export const setProfileTC = (userID: number) => {
-    return (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+export const setProfileTC = (userID: number) => (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
         dispatch(changeLoader(true))
         profileAPI.getProfile(userID)
             .then(data => {
@@ -81,7 +80,6 @@ export const setProfileTC = (userID: number) => {
                 dispatch(setProfile(data))
             })
     }
-}
 
 export const profileReducer = (state: ProfilePagePropsType = initialState, action: ActionProfilePropsType): ProfilePagePropsType => {
     switch (action.type) {
