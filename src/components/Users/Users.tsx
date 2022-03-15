@@ -10,9 +10,11 @@ type UsersPresentationPropsType = {
     totalUsersCount: number
     pageSize: number
     currentPage: number
+    toggledButton: number[]
     usersPage: UsersPagePropsType
     setCurrentPage: (page: number) => void
     followClick: (id: number) => void
+    toggleDisableButton: (isFetching: boolean, userID: number) => void
 }
 
 export const Users = (props: UsersPresentationPropsType) => {
@@ -36,19 +38,26 @@ export const Users = (props: UsersPresentationPropsType) => {
                                      alt={'User avatar'}/>
                             </NavLink>
                             <button
+                                disabled={props.toggledButton.some(id => id === m.id)}
                                 onClick={() => {
                                     if (m.followed) {
+                                        props.toggleDisableButton(true, m.id)
                                         followAPI.unFollowUser(m.id)
                                             .then(data => {
                                                 console.log('DELETE')
                                                 if (data.resultCode === 0) props.followClick(m.id)
+                                                props.toggleDisableButton(false, m.id)
                                             })
+
                                     } else {
+                                        props.toggleDisableButton(true, m.id)
                                         followAPI.followUser(m.id)
                                             .then(data => {
                                                 console.log('POST')
                                                 if (data.resultCode === 0) props.followClick(m.id)
+                                                props.toggleDisableButton(false, m.id)
                                             })
+
                                     }
                                 }}>{m.followed ? 'Follow' : 'Unfollow'}
                             </button>

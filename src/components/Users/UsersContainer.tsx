@@ -6,7 +6,7 @@ import {
     isFetching,
     setCurrentPage,
     setTotalUsersCount,
-    setUsers,
+    setUsers, toggleDisableButton,
     UsersPagePropsType
 } from '../../Redux/users_reducer';
 import React from 'react';
@@ -19,6 +19,7 @@ type MapStateToPropsType = {
     totalUsersCount: number
     currentPage: number
     isFetch: boolean
+    toggledButton: number[]
 }
 type MapDispatchToPropsType = {
     follow: (userId: number) => void
@@ -26,6 +27,7 @@ type MapDispatchToPropsType = {
     setCurrentPage: (users: number) => void
     setTotalUsersCount: (totalUsersCount: number) => void
     isFetching: (isFetching: boolean) => void
+    toggleDisableButton: (isFetching: boolean, userID: number) => void
 }
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
@@ -58,6 +60,8 @@ export class UsersAPI extends React.Component<UsersPropsType, UsersPagePropsType
                      pageSize={this.props.pageSize}
                      totalUsersCount={this.props.totalUsersCount}
                      setCurrentPage={this.setCurrentPage}
+                     toggledButton={this.props.toggledButton}
+                     toggleDisableButton={this.props.toggleDisableButton}
                      followClick={this.props.follow}/>
             : <Loading/>
     }
@@ -69,7 +73,8 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFetch: state.usersPage.isFetch
+        isFetch: state.usersPage.isFetch,
+        toggledButton: state.usersPage.toggledButton
     }
 }
 
@@ -78,5 +83,6 @@ export const UsersContainer = connect(mapStateToProps, {
     setUsers,
     setCurrentPage,
     setTotalUsersCount,
-    isFetching
+    isFetching,
+    toggleDisableButton
 })(UsersAPI)
