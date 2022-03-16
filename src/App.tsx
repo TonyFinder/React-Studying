@@ -10,6 +10,7 @@ import {UsersContainer} from './components/Users/UsersContainer';
 import {ProfileContainer} from './components/Profile/ProfileContainer';
 import {Route, Routes} from 'react-router-dom';
 import {HeaderContainer} from './components/Header/HeaderContainer';
+import {Login} from './components/Login/Login';
 
 type AppProps = {
     sitebar: SitebarPropsType
@@ -28,6 +29,8 @@ const App = (props: AppProps) => {
                            element={<ProfileContainer/>}/>
                     <Route path="/users"
                            element={<UsersContainer/>}/>
+                    <Route path="/login"
+                           element={<Login/>}/>
                     <Route path="/news" element={<News/>}/>
                     <Route path="/music" element={<Music/>}/>
                     <Route path="/settings" element={<Settings/>}/>

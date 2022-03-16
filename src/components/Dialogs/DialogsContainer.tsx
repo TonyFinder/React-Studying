@@ -8,6 +8,7 @@ import {Dispatch} from 'redux';
 // Нужно типизировать то, что mapStateToProps возвращает
 export type MapStateToPropsType = {
     dialogsPage: InitialStateDialogsType
+    isAuth: boolean
 }
 export type MapDispatchToPropsType = {
     changeMessageHandler: (e: ChangeEvent<HTMLTextAreaElement>) => void
@@ -17,7 +18,8 @@ export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
+        isAuth: state.auth.isAuth
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
