@@ -1,9 +1,9 @@
-import {ChangeEvent} from 'react';
+import {ChangeEvent, ComponentType} from 'react';
 import {addNewMessageAC, InitialStateDialogsType, newMessageAC} from '../../Redux/dialogs_reducer';
 import Dialogs from './Dialogs';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../Redux/redux-store';
-import {Dispatch} from 'redux';
+import {compose, Dispatch} from 'redux';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
 // Нужно типизировать то, что mapStateToProps возвращает
@@ -32,6 +32,7 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     }
 }
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(withAuthRedirect(Dialogs))
-
-export default DialogsContainer
+export default compose<ComponentType>(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(Dialogs)
