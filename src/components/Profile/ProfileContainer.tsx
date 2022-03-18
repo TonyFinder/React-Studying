@@ -3,12 +3,12 @@ import Profile from './Profile';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../Redux/redux-store';
 import {ProfilePropsType, setProfileTC} from '../../Redux/profile_reducer';
-import {Navigate, useLocation, useNavigate, useParams,} from 'react-router-dom';
+import {useLocation, useNavigate, useParams,} from 'react-router-dom';
+import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
 type MapStateToPropsType = {
     profilePage: ProfilePropsType
     isFetching: boolean
-    isAuth: boolean
 }
 type MapDispatchToPropsType = {
     setProfileTC: (userID: number) => void
@@ -41,20 +41,14 @@ class ProfileAPI extends React.Component<ProfileMainPropsType, ProfilePropsType>
         if (userID === 1) userID = 2
         this.props.setProfileTC(userID)
     }
-    render = () => {
-        return this.props.isAuth
-            ? <Profile profilePage={this.props.profilePage} isFetching={this.props.isFetching}/>
-            : <Navigate to={'/login'}/>
-    }
+    render = () => <Profile profilePage={this.props.profilePage} isFetching={this.props.isFetching}/>
 }
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         profilePage: state.profilePage.profile,
         isFetching: state.profilePage.isFetching,
-        isAuth: state.auth.isAuth
     }
 }
 
-const ProfileWithRouter = withRouter(ProfileAPI)
-export const ProfileContainer = connect(mapStateToProps, {setProfileTC})(ProfileWithRouter)
+export const ProfileContainer = connect(mapStateToProps, {setProfileTC})(withAuthRedirect(withRouter(ProfileAPI)))
