@@ -2,7 +2,7 @@ import React, {ComponentType} from 'react';
 import Profile from './Profile';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../Redux/redux-store';
-import {ProfilePropsType, setProfileTC} from '../../Redux/profile_reducer';
+import {ProfilePropsType, setProfileTC, getStatusTC, updateStatusTC} from '../../Redux/profile_reducer';
 import {useLocation, useNavigate, useParams,} from 'react-router-dom';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
@@ -10,9 +10,12 @@ import { compose } from 'redux';
 type MapStateToPropsType = {
     profilePage: ProfilePropsType
     isFetching: boolean
+    status: string
 }
 type MapDispatchToPropsType = {
     setProfileTC: (userID: number) => void
+    getStatusTC: (userID: number) => void
+    updateStatusTC: (status: string) => void
 }
 type RouteType = {
     router: { params: { id: number } }
@@ -40,20 +43,23 @@ class ProfileAPI extends React.Component<ProfileMainPropsType, ProfilePropsType>
     componentDidMount = () => {
         let userID = this.props.router.params.id
         if (userID === 1) userID = 2
-        this.props.setProfileTC(userID)
+        this.props.getStatusTC(userID)
+        setTimeout(() => this.props.setProfileTC(userID), 300)
     }
-    render = () => <Profile profilePage={this.props.profilePage} isFetching={this.props.isFetching}/>
+    render = () => <Profile profilePage={this.props.profilePage} isFetching={this.props.isFetching}
+                            status={this.props.status} updateStatus={this.props.updateStatusTC}/>
 }
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         profilePage: state.profilePage.profile,
         isFetching: state.profilePage.isFetching,
+        status: state.profilePage.status
     }
 }
 
 export default compose<ComponentType>(
-    connect(mapStateToProps, {setProfileTC}),
+    connect(mapStateToProps, {setProfileTC, getStatusTC, updateStatusTC}),
     withAuthRedirect,
     withRouter
 )(ProfileAPI)

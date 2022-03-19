@@ -29,6 +29,12 @@ export const profileAPI = {
     getProfile(userID: number){
         return instance.get<any>(`profile/${userID}`)
             .then((response: AxiosResponse) => response.data)
+    },
+    getStatus(userID: number){
+        return instance.get<any>(`profile/status/${userID}`)
+    },
+    updateStatus(status: string){
+        return instance.put<any>(`profile/status`, {status})
     }
 }
 export const authAPI = {

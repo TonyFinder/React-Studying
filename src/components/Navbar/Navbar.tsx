@@ -11,7 +11,7 @@ const Navbar = (props: NavbarPropsType) => {
     return (
         <nav className={n.navi}>
             <div className={n.item}>
-                <NavLink to="/profile/16306" style={(param) => ({color: param.isActive ? "black" : "white"})}>Profile</NavLink>
+                <NavLink to="/profile/21224" style={(param) => ({color: param.isActive ? "black" : "white"})}>Profile</NavLink>
             </div>
             <div className={`${n.item} ${n.active}`}>
                 <NavLink to="/dialogs" style={(param) => ({color: param.isActive ? "black" : "white"})}>Messages</NavLink>

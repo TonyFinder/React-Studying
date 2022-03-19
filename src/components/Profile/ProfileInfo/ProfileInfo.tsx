@@ -8,6 +8,8 @@ import StatusChange from '../StatusChange/StatusChange';
 type ProfileInfoPropsType = {
     profilePage: ProfilePropsType
     isFetching: boolean
+    status: string
+    updateStatus: (status: string) => void
 }
 
 const ProfileInfo = (props: ProfileInfoPropsType) => {
@@ -15,13 +17,16 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
         {/*<div className={p.image}>
             <img src='https://cdn.pixabay.com/photo/2016/10/18/21/22/beach-1751455__480.jpg' alt='avatar'/>
         </div>*/}
-        <StatusChange/>
-        { !props.isFetching
-            ?<div className={p.description}>
-                <img src={props.profilePage.photos.small ? props.profilePage.photos.small : imageDefault} alt={"user"}/>
-                <div>{props.profilePage.aboutMe}</div>
+        {!props.isFetching
+            ? <div>
+                <div className={p.description}>
+                    <img src={props.profilePage.photos.small ? props.profilePage.photos.small : imageDefault}
+                         alt={'user'}/>
+                    <div>{props.profilePage.fullName}</div>
+                </div>
+                <StatusChange status={props.status} updateStatus={props.updateStatus}/>
             </div>
-            :<Loading/>
+            : <Loading/>
         }
     </div>
 }

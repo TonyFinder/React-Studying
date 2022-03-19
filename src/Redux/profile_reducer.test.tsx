@@ -1,5 +1,13 @@
 import React from 'react';
-import {addPost, changeLoader, newPostText, ProfilePagePropsType, profileReducer, setProfile} from './profile_reducer';
+import {
+    addPost,
+    changeLoader,
+    newPostText,
+    ProfilePagePropsType,
+    profileReducer,
+    setProfile,
+    setStatus
+} from './profile_reducer';
 
 let beginState: ProfilePagePropsType = {
     posts: [
@@ -8,6 +16,7 @@ let beginState: ProfilePagePropsType = {
     ],
     newPost: 'It-world is cool',
     isFetching: false,
+    status: "This status is from initial State from profile",
     profile: {
         aboutMe: "Samurai",
         contacts: {
@@ -41,6 +50,7 @@ test("Changing text for new post", () => {
         ],
         newPost: 'New post - it is me!',
         isFetching: false,
+        status: "This status is from initial State from profile",
         profile: {
             aboutMe: "Samurai",
             contacts: {
@@ -70,6 +80,7 @@ test("Changing text for new post", () => {
         ],
         newPost: 'It-world is cool',
         isFetching: false,
+        status: "This status is from initial State from profile",
         profile: {
             aboutMe: "Samurai",
             contacts: {
@@ -105,6 +116,7 @@ test("Adding a new post", () => {
         ],
         newPost: '',
         isFetching: false,
+        status: "This status is from initial State from profile",
         profile: {
             aboutMe: "Samurai",
             contacts: {
@@ -134,6 +146,7 @@ test("Adding a new post", () => {
         ],
         newPost: 'It-world is cool',
         isFetching: false,
+        status: "This status is from initial State from profile",
         profile: {
             aboutMe: "Samurai",
             contacts: {
@@ -188,6 +201,7 @@ test('Set a new profile', () => {
         ],
         newPost: 'It-world is cool',
         isFetching: false,
+        status: "This status is from initial State from profile",
         profile: {
             aboutMe: "Samurai",
             contacts: {
@@ -217,6 +231,7 @@ test('Set a new profile', () => {
         ],
         newPost: 'It-world is cool',
         isFetching: false,
+        status: "This status is from initial State from profile",
         profile: {
             aboutMe: "Tony",
             contacts: {
@@ -251,6 +266,7 @@ test('Setting loading image', () => {
         ],
         newPost: 'It-world is cool',
         isFetching: false,
+        status: "This status is from initial State from profile",
         profile: {
             aboutMe: "Samurai",
             contacts: {
@@ -280,6 +296,72 @@ test('Setting loading image', () => {
         ],
         newPost: 'It-world is cool',
         isFetching: true,
+        status: "This status is from initial State from profile",
+        profile: {
+            aboutMe: "Samurai",
+            contacts: {
+                facebook: "",
+                website: null,
+                vk: "",
+                twitter: "",
+                instagram: "",
+                youtube: null,
+                github: null,
+                mainLink: null
+            },
+            lookingForAJob: true,
+            lookingForAJobDescription: "IT-INCUBATOR",
+            fullName: "",
+            userId: 11,
+            photos: {
+                small: null,
+                large: null
+            }
+        }
+    })
+})
+
+test("Change status of profile", () => {
+    let endState = profileReducer(beginState, setStatus("I was changed! It's your status :)"))
+
+    expect(beginState).toEqual({
+        posts: [
+            {id: 1, message: 'How are you?', likesNumber: 15},
+            {id: 2, message: 'It is my first message!', likesNumber: 20}
+        ],
+        newPost: 'It-world is cool',
+        isFetching: false,
+        status: "This status is from initial State from profile",
+        profile: {
+            aboutMe: "Samurai",
+            contacts: {
+                facebook: "",
+                website: null,
+                vk: "",
+                twitter: "",
+                instagram: "",
+                youtube: null,
+                github: null,
+                mainLink: null
+            },
+            lookingForAJob: true,
+            lookingForAJobDescription: "IT-INCUBATOR",
+            fullName: "",
+            userId: 11,
+            photos: {
+                small: null,
+                large: null
+            }
+        }
+    })
+    expect(endState).toEqual({
+        posts: [
+            {id: 1, message: 'How are you?', likesNumber: 15},
+            {id: 2, message: 'It is my first message!', likesNumber: 20}
+        ],
+        newPost: 'It-world is cool',
+        isFetching: false,
+        status: "I was changed! It's your status :)",
         profile: {
             aboutMe: "Samurai",
             contacts: {

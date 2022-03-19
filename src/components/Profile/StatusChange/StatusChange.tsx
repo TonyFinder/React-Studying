@@ -1,8 +1,13 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 
-class StatusChange extends React.Component<{}, {}> {
+type StatusChangeType = {
+    status: string
+    updateStatus: (status: string) => void
+}
+
+class StatusChange extends React.Component<StatusChangeType, {}> {
     state = {
-        text: 'He is just fine',
+        status: this.props.status,
         editMode: false
     }
 
@@ -12,9 +17,11 @@ class StatusChange extends React.Component<{}, {}> {
         })
     }
     deactivateEditMode = () => {
-        this.setState({
-            editMode: false
-        })
+        this.setState({editMode: false})
+        this.props.updateStatus(this.state.status)
+    }
+    textChanger = (e: ChangeEvent<HTMLInputElement>) => {
+        this.setState({status: e.currentTarget.value})
     }
 
     render() {
@@ -22,10 +29,10 @@ class StatusChange extends React.Component<{}, {}> {
             <div>
                 {!this.state.editMode
                     ? <div>
-                        <span onDoubleClick={this.activateEditMode}>{this.state.text}</span>
+                        <span onDoubleClick={this.activateEditMode}>{this.state.status}</span>
                     </div>
                     : <div>
-                        <input autoFocus={true} onBlur={this.deactivateEditMode} value={this.state.text}/>
+                        <input autoFocus={true} onChange={this.textChanger} onBlur={this.deactivateEditMode} value={this.state.status}/>
                     </div>
                 }
             </div>
