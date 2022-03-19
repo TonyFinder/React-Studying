@@ -65,7 +65,7 @@ let initialState: ProfilePagePropsType = {
     },
     newPost: 'It-world is cool',
     isFetching: false,
-    status: "This status is from initial State from profile"
+    status: ""
 }
 
 export const addPost = () => ({type: 'ADD-POST'} as const)

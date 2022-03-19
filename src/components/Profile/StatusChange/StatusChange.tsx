@@ -24,6 +24,12 @@ class StatusChange extends React.Component<StatusChangeType, {}> {
         this.setState({status: e.currentTarget.value})
     }
 
+    componentDidUpdate(prevProps: Readonly<StatusChangeType>, prevState: Readonly<{}>) {
+        if (prevProps.status !== this.props.status) {
+            this.setState({status: this.props.status})
+        }
+    }
+
     render() {
         return (
             <div>
