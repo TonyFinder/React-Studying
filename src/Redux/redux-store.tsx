@@ -5,13 +5,15 @@ import {sitebarReducer} from './sitebar_reducer';
 import {usersReducer} from './users_reducer';
 import {authReducer} from './auth_reducer';
 import thunkMiddleware from 'redux-thunk'
+import {reducer as formReducer} from 'redux-form';
 
 export const rootReducers = combineReducers ({
     dialogsPage: dialogReducer,
     profilePage: profileReducer,
     sitebar: sitebarReducer,
     usersPage: usersReducer,
-    auth: authReducer
+    auth: authReducer,
+    form: formReducer
 })
 
 // Типизация стейта автоматическая.
