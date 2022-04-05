@@ -44,23 +44,21 @@ let initialState = {
         {id: 3, message: 'Yo', iTalk: true},
         {id: 4, message: 'Yo', iTalk: true},
         {id: 5, message: 'Yo', iTalk: false}
-    ] as MessagesPropsType[],
-    newMessage: ''
+    ] as MessagesPropsType[]
 }
-
-export type InitialStateDialogsType = typeof initialState
-
-export const newMessageAC = (message: string) => ({type: 'NEW-MESSAGE-TEXT', message: message} as const)
-export const addNewMessageAC = () => ({type: 'ADD-MESSAGE'} as const)
-export type ActionDialogPropsType = ReturnType<typeof newMessageAC> | ReturnType<typeof addNewMessageAC>
 
 export const dialogReducer = (state: InitialStateDialogsType = initialState, action: ActionDialogPropsType): InitialStateDialogsType => {
     switch (action.type) {
-        case 'NEW-MESSAGE-TEXT':
-            return {...state, newMessage: action.message}
         case 'ADD-MESSAGE':
-            return {...state, messages: [...state.messages, {id: state.messages.length + 1, message: state.newMessage, iTalk: true}], newMessage: ""}
+            return {...state, messages: [...state.messages, {id: state.messages.length + 1, message: action.newMessage, iTalk: true}]}
         default:
             return state
     }
 }
+
+// actions
+export const addNewMessageAC = (newMessage: string) => ({type: 'ADD-MESSAGE', newMessage} as const)
+
+// types
+export type InitialStateDialogsType = typeof initialState
+export type ActionDialogPropsType = ReturnType<typeof addNewMessageAC>

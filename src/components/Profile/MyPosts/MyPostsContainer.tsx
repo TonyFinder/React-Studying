@@ -1,4 +1,4 @@
-import {addPost, newPostText, ProfilePagePropsType} from '../../../Redux/profile_reducer';
+import {addPost, ProfilePagePropsType} from '../../../Redux/profile_reducer';
 import MyPosts from './MyPosts';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../../Redux/redux-store';
@@ -8,8 +8,7 @@ type MapToStatePropsType = {
     profilePage: ProfilePagePropsType
 }
 type MapToDispatchPropsType = {
-    addPost: () => void
-    onChangeTextareaMessage: (message: string) => void
+    addPost: (value: string) => void
 }
 export type MyPostsPropsType = MapToStatePropsType & MapToDispatchPropsType
 
@@ -20,11 +19,8 @@ let MapToStateProps = (state: AppStateType): MapToStatePropsType => {
 }
 let MapToDispatchProps = (dispatch: Dispatch) => {
     return {
-        addPost: () => {
-            dispatch(addPost())
-        },
-        onChangeTextareaMessage: (message: string) => {
-            dispatch(newPostText(message))
+        addPost: (newPost: string) => {
+            dispatch(addPost(newPost))
         }
     }
 }

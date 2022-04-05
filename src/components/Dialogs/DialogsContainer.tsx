@@ -1,5 +1,5 @@
-import {ChangeEvent, ComponentType} from 'react';
-import {addNewMessageAC, InitialStateDialogsType, newMessageAC} from '../../Redux/dialogs_reducer';
+import {ComponentType} from 'react';
+import {addNewMessageAC, InitialStateDialogsType} from '../../Redux/dialogs_reducer';
 import Dialogs from './Dialogs';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../Redux/redux-store';
@@ -11,8 +11,7 @@ export type MapStateToPropsType = {
     dialogsPage: InitialStateDialogsType
 }
 export type MapDispatchToPropsType = {
-    changeMessageHandler: (e: ChangeEvent<HTMLTextAreaElement>) => void
-    addMessageHandler: () => void
+    addMessageHandler: (newMessage: string) => void
 }
 export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
@@ -23,11 +22,8 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 }
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
-        changeMessageHandler: (e: ChangeEvent<HTMLTextAreaElement>) => {
-            dispatch(newMessageAC(e.currentTarget.value))
-        },
-        addMessageHandler: () => {
-            dispatch(addNewMessageAC())
+        addMessageHandler: (newMessage: string) => {
+            dispatch(addNewMessageAC(newMessage))
         }
     }
 }

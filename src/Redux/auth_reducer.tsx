@@ -9,10 +9,9 @@ let initialState = {
     isAuth: false
 }
 export type AuthLoginStatePropsType = typeof initialState
+export type ActionAuthPropsType = ReturnType<typeof setAuthUserData>
 
 export const setAuthUserData = (data: AuthLoginStatePropsType) => ({type: 'SET-USER-DATA', data} as const)
-
-export type ActionAuthPropsType = ReturnType<typeof setAuthUserData>
 
 export const setAuthUserTC = () => (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
         authAPI.authMe().then(data => {

@@ -1,6 +1,6 @@
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 
-type LoginFormType = {
+export type LoginFormType = {
     login: string
     pass: string
     rememberMe: boolean

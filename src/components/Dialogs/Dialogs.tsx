@@ -1,12 +1,12 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import d from './Dialogs.module.css';
 import {DialogItems} from './DialogItems/DialogItems';
 import {Message} from './Message/Message';
 import {DialogsPropsType} from './DialogsContainer';
+import {DialogForm} from './DialogMessageForm';
 
 const Dialogs = (props: DialogsPropsType) => {
-    const changeMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => props.changeMessageHandler(e)
-    const addMessageHandler = () => props.addMessageHandler()
+    const addMessageHandler = (newMessage: string) => props.addMessageHandler(newMessage)
 
     return (
         <div className={d.allPageDialogs}>
@@ -17,16 +17,7 @@ const Dialogs = (props: DialogsPropsType) => {
             <div className={d.messages}>
                 {props.dialogsPage.messages.map(messages => <Message key={messages.id} message={messages.message}
                                                                      iTalk={messages.iTalk}/>)}
-                <div className={d.newTextArea}>
-                    <div>
-                        <textarea placeholder={'Enter your message'}
-                                  value={props.dialogsPage.newMessage}
-                                  onChange={changeMessageHandler}/>
-                    </div>
-                    <div>
-                        <button onClick={addMessageHandler}>Send message</button>
-                    </div>
-                </div>
+                <DialogForm addMessage={addMessageHandler}/>
             </div>
         </div>
     )
