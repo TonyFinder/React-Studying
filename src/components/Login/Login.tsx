@@ -1,4 +1,6 @@
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
+import {Input} from '../common/FormControls/FormControls';
+import {maxLength, required} from '../../utils/validators';
 
 export type LoginFormType = {
     login: string
@@ -17,15 +19,16 @@ export const Login = () => {
     </div>
 }
 
+const maxLength5 = maxLength(5)
 
 const LoginForm = (props: InjectedFormProps<LoginFormType>) => {
     return <div>
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field name={"login"} placeholder={"login"} component={"input"}/>
+                <Field name={"login"} placeholder={"login"} component={Input} validate={[required, maxLength5]}/>
             </div>
             <div>
-                <Field name={"pass"} placeholder={"password"} component={"input"}/>
+                <Field name={"pass"} placeholder={"password"} component={Input} validate={[required, maxLength5]}/>
             </div>
             <div>
                 <Field name={"rememberMe"} type={"checkbox"} component={"input"}/>Remember me

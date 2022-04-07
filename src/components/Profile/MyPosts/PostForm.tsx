@@ -1,5 +1,7 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
+import {Textarea} from '../../common/FormControls/FormControls';
+import {maxLength, required} from '../../../utils/validators';
 
 type MyPostFormPropsType = {
     postCallback: (value: PostFormType) => void
@@ -19,11 +21,14 @@ export const MyPostForm = (props: MyPostFormPropsType) => {
     </div>
 }
 
+export let maxlength10 = maxLength(10)
+
 const PostForm = (props: InjectedFormProps<PostFormType>) => {
     return <div>
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field name={'newPost'} placeholder={'new post'} component={'textarea'}/>
+                <Field name={'newPost'} placeholder={'new post'} component={Textarea}
+                validate={[required, maxlength10]}/>
             </div>
             <div>
                 <button>Add post</button>
