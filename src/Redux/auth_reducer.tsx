@@ -1,5 +1,4 @@
-import {ThunkDispatch} from 'redux-thunk';
-import {AnyAction} from 'redux';
+import {Dispatch} from 'redux';
 import {authAPI} from '../api/api';
 
 let initialState = {
@@ -8,26 +7,46 @@ let initialState = {
     login: null,
     isAuth: false
 }
-export type AuthLoginStatePropsType = typeof initialState
-export type ActionAuthPropsType = ReturnType<typeof setAuthUserData>
-
-export const setAuthUserData = (data: AuthLoginStatePropsType) => ({type: 'SET-USER-DATA', data} as const)
-
-export const setAuthUserTC = () => (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
-        authAPI.authMe().then(data => {
-            if (data.resultCode === 0) dispatch(setAuthUserData(data.data))
-        })
-    }
 
 export const authReducer = (state: AuthLoginStatePropsType = initialState, action: ActionAuthPropsType): AuthLoginStatePropsType => {
     switch (action.type) {
         case 'SET-USER-DATA':
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.payload
             }
         default:
             return state
     }
 }
+
+// actions
+export const setAuthUserData = ({id, email, login, isAuth}: AuthLoginStatePropsType) => ({type: 'SET-USER-DATA', payload: {id, email, login, isAuth}} as const)
+
+// thunks
+export const setAuthUserTC = () => (dispatch: Dispatch) => {
+    authAPI.authMe()
+        .then(data => {
+            debugger
+        if (data.resultCode === 0) dispatch(setAuthUserData({...data.data, isAuth: true}))
+    })
+}
+export const loginTC = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch<any>) => {
+    authAPI.login(email, password, rememberMe)
+        .then(res => {
+            debugger
+            if (res.data.resultCode === 0) {
+                dispatch(setAuthUserTC())
+            }
+        })
+}
+export const logoutTC = () => (dispatch: Dispatch) => {
+    authAPI.logout()
+        .then(res => {
+            if (res.data.resultCode === 0) dispatch(setAuthUserData({id: null, email: null, login: null, isAuth: false}))
+        })
+}
+
+// types
+export type AuthLoginStatePropsType = typeof initialState
+export type ActionAuthPropsType = ReturnType<typeof setAuthUserData>

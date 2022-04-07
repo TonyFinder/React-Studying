@@ -41,5 +41,11 @@ export const authAPI = {
     authMe() {
         return instance.get<any>(`auth/me`)
             .then((response: AxiosResponse) => response.data)
+    },
+    login(email: string, password: string, rememberMe: boolean) {
+        return instance.post<any>('auth/login', {email, password, rememberMe})
+    },
+    logout() {
+        return instance.delete<any>('auth/login')
     }
 }

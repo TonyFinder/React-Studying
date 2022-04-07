@@ -1,16 +1,18 @@
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 import {Input} from '../common/FormControls/FormControls';
 import {maxLength, required} from '../../utils/validators';
+import { connect } from 'react-redux';
+import {loginTC} from '../../Redux/auth_reducer';
 
 export type LoginFormType = {
-    login: string
-    pass: string
+    email: string
+    password: string
     rememberMe: boolean
 }
 
-export const Login = () => {
+const Login = (props: any) => {
     const onSubmit = (formData: LoginFormType) => {
-        console.log(formData)
+        props.loginTC(formData.email, formData.password, formData.rememberMe)
     }
 
     return <div>
@@ -19,16 +21,16 @@ export const Login = () => {
     </div>
 }
 
-const maxLength5 = maxLength(5)
+const maxLength25 = maxLength(25)
 
 const LoginForm = (props: InjectedFormProps<LoginFormType>) => {
     return <div>
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field name={"login"} placeholder={"login"} component={Input} validate={[required, maxLength5]}/>
+                <Field name={"email"} placeholder={"email"} component={Input} validate={[required, maxLength25]}/>
             </div>
             <div>
-                <Field name={"pass"} placeholder={"password"} component={Input} validate={[required, maxLength5]}/>
+                <Field name={"password"} placeholder={"password"} component={Input} type={"password"} validate={[required, maxLength25]}/>
             </div>
             <div>
                 <Field name={"rememberMe"} type={"checkbox"} component={"input"}/>Remember me
@@ -41,3 +43,4 @@ const LoginForm = (props: InjectedFormProps<LoginFormType>) => {
 }
 
 const LoginReduxForm = reduxForm<LoginFormType>({form: 'login'})(LoginForm)
+export default connect(null, {loginTC})(Login);

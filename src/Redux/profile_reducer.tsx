@@ -25,8 +25,8 @@ let initialState: ProfilePagePropsType = {
         fullName: '',
         userId: 11,
         photos: {
-            small: null,
-            large: null
+            small: 'https://pickaface.net/gallery/avatar/.2108558ad44e8ac1d.png',
+            large: 'https://pickaface.net/gallery/avatar/.2108558ad44e8ac1d.png'
         }
     },
     isFetching: false,
