@@ -27,14 +27,12 @@ export const setAuthUserData = ({id, email, login, isAuth}: AuthLoginStatePropsT
 export const setAuthUserTC = () => (dispatch: Dispatch) => {
     authAPI.authMe()
         .then(data => {
-            debugger
         if (data.resultCode === 0) dispatch(setAuthUserData({...data.data, isAuth: true}))
     })
 }
 export const loginTC = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch<any>) => {
     authAPI.login(email, password, rememberMe)
         .then(res => {
-            debugger
             if (res.data.resultCode === 0) {
                 dispatch(setAuthUserTC())
             }
