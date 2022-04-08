@@ -26,7 +26,7 @@ type FormControlsPropsType = {
 export const FormControl = ({input, meta, children, ...restProps}: FormControlsPropsType) => {
     let props = {input, meta, children, ...restProps}
     let isError = meta.error && meta.touched
-        return <div className={styles.formControl + ' ' + `${isError ? styles.error : ''}`}>
+        return <div className={styles.formControl + ' ' + (isError ? styles.error : '')}>
             <div>{props.children}</div>
             {isError && <span className={styles.error}>{meta.error}</span>}
         </div>

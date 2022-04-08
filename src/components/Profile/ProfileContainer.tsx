@@ -11,6 +11,7 @@ type MapStateToPropsType = {
     profilePage: ProfilePropsType
     isFetching: boolean
     status: string
+    authorizedUserId: any
 }
 type MapDispatchToPropsType = {
     setProfileTC: (userID: number) => void
@@ -42,9 +43,9 @@ function withRouter(Component: any) {
 class ProfileAPI extends React.Component<ProfileMainPropsType, ProfilePropsType> {
     componentDidMount = () => {
         let userID = this.props.router.params.id
-        if (userID === 1) userID = 2
+        if (!userID) userID = this.props.authorizedUserId
+        this.props.setProfileTC(userID)
         this.props.getStatusTC(userID)
-        setTimeout(() => this.props.setProfileTC(userID), 300)
     }
     render = () => <Profile profilePage={this.props.profilePage} isFetching={this.props.isFetching}
                             status={this.props.status} updateStatus={this.props.updateStatusTC}/>
@@ -54,7 +55,8 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         profilePage: state.profilePage.profile,
         isFetching: state.profilePage.isFetching,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        authorizedUserId: state.auth.id
     }
 }
 

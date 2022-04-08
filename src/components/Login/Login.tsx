@@ -1,10 +1,11 @@
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 import {Input} from '../common/FormControls/FormControls';
 import {maxLength, required} from '../../utils/validators';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import {loginTC} from '../../Redux/auth_reducer';
-import {AppStateType, store} from '../../Redux/redux-store';
-import { Navigate } from 'react-router-dom';
+import {AppStateType} from '../../Redux/redux-store';
+import {Navigate} from 'react-router-dom';
+import styles from './../common/FormControls/FormControls.module.css'
 
 export type LoginFormType = {
     email: string
@@ -31,17 +32,22 @@ const LoginForm = (props: InjectedFormProps<LoginFormType>) => {
     return <div>
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field name={"email"} placeholder={"email"} component={Input} validate={[required, maxLength25]}/>
+                <Field name={'email'} placeholder={'email'} component={Input} validate={[required, maxLength25]}/>
             </div>
             <div>
-                <Field name={"password"} placeholder={"password"} component={Input} type={"password"} validate={[required, maxLength25]}/>
+                <Field name={'password'} placeholder={'password'} component={Input} type={'password'}
+                       validate={[required, maxLength25]}/>
             </div>
             <div>
-                <Field name={"rememberMe"} type={"checkbox"} component={"input"}/>Remember me
+                <Field name={'rememberMe'} type={'checkbox'} component={'input'}/>Remember me
             </div>
             <div>
                 <button>Submit</button>
             </div>
+            {props.error && <div className={styles.unauthorizedError}>
+                {props.error}
+            </div>
+            }
         </form>
     </div>
 }

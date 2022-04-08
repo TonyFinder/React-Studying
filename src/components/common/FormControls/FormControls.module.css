@@ -6,3 +6,10 @@
 .formControl.error span {
     color: red;
 }
+
+.unauthorizedError {
+    color: lime;
+    font-weight: bold;
+    border: 5px solid purple;
+    padding: 10px;
+}
