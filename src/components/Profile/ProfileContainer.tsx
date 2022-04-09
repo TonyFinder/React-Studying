@@ -2,16 +2,17 @@ import React, {ComponentType} from 'react';
 import Profile from './Profile';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../Redux/redux-store';
-import {ProfilePropsType, setProfileTC, getStatusTC, updateStatusTC} from '../../Redux/profile_reducer';
+import {getStatusTC, ProfilePropsType, setProfileTC, updateStatusTC} from '../../Redux/profile_reducer';
 import {useLocation, useNavigate, useParams,} from 'react-router-dom';
-import {withAuthRedirect} from '../../hoc/withAuthRedirect';
-import { compose } from 'redux';
+import {compose} from 'redux';
+import {Loading} from '../common/Loading/Loading';
 
 type MapStateToPropsType = {
     profilePage: ProfilePropsType
     isFetching: boolean
     status: string
     authorizedUserId: any
+    initialized: boolean
 }
 type MapDispatchToPropsType = {
     setProfileTC: (userID: number) => void
@@ -42,13 +43,17 @@ function withRouter(Component: any) {
 
 class ProfileAPI extends React.Component<ProfileMainPropsType, ProfilePropsType> {
     componentDidMount = () => {
+        debugger
         let userID = this.props.router.params.id
         if (!userID) userID = this.props.authorizedUserId
         this.props.setProfileTC(userID)
         this.props.getStatusTC(userID)
     }
-    render = () => <Profile profilePage={this.props.profilePage} isFetching={this.props.isFetching}
-                            status={this.props.status} updateStatus={this.props.updateStatusTC}/>
+    render = () => {
+        if (!this.props.initialized) return <Loading/>
+        return <Profile profilePage={this.props.profilePage} isFetching={this.props.isFetching}
+                 status={this.props.status} updateStatus={this.props.updateStatusTC}/>
+    }
 }
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
@@ -56,12 +61,12 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         profilePage: state.profilePage.profile,
         isFetching: state.profilePage.isFetching,
         status: state.profilePage.status,
-        authorizedUserId: state.auth.id
+        authorizedUserId: state.auth.id,
+        initialized: state.app.initialized
     }
 }
 
 export default compose<ComponentType>(
     connect(mapStateToProps, {setProfileTC, getStatusTC, updateStatusTC}),
-    withAuthRedirect,
     withRouter
 )(ProfileAPI)

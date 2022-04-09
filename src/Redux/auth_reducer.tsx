@@ -1,6 +1,7 @@
-import {Dispatch} from 'redux';
+import {AnyAction, Dispatch} from 'redux';
 import {authAPI} from '../api/api';
 import {stopSubmit} from 'redux-form';
+import {ThunkDispatch} from 'redux-thunk';
 
 let initialState = {
     id: null,
@@ -25,11 +26,11 @@ export const authReducer = (state: AuthLoginStatePropsType = initialState, actio
 export const setAuthUserData = ({id, email, login, isAuth}: AuthLoginStatePropsType) => ({type: 'SET-USER-DATA', payload: {id, email, login, isAuth}} as const)
 
 // thunks
-export const setAuthUserTC = () => (dispatch: Dispatch) => {
-    authAPI.authMe()
+export const setAuthUserTC = () => (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+    return authAPI.authMe()
         .then(data => {
-        if (data.resultCode === 0) dispatch(setAuthUserData({...data.data, isAuth: true}))
-    })
+            if (data.resultCode === 0) dispatch(setAuthUserData({...data.data, isAuth: true}))
+        })
 }
 export const loginTC = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch<any>) => {
     authAPI.login(email, password, rememberMe)

@@ -11,7 +11,7 @@ let rerender = () => {
         <React.StrictMode>
             <HashRouter>
                 <Provider store={store}>
-                    <App sitebar={store.getState().sitebar}/>
+                    <App/>
                 </Provider>
             </HashRouter>
         </React.StrictMode>,
