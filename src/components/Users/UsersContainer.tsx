@@ -10,6 +10,14 @@ import {
 } from '../../Redux/users_reducer';
 import React from 'react';
 import {Loading} from '../common/Loading/Loading';
+import {
+    getCurrentPage,
+    getPageSize,
+    getToggledButton,
+    getTotalUsersCount,
+    getUsersPage,
+    isFetch
+} from '../../Redux/users-selectors';
 
 type MapStateToPropsType = {
     usersPage: UsersPagePropsType
@@ -43,16 +51,14 @@ export class UsersAPI extends React.Component<UsersPropsType, UsersPagePropsType
         : <Loading/>
 }
 
-let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
-    return {
-        usersPage: state.usersPage,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetch: state.usersPage.isFetch,
-        toggledButton: state.usersPage.toggledButton
-    }
-}
+let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
+        usersPage: getUsersPage(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetch: isFetch(state),
+        toggledButton: getToggledButton(state)
+})
 
 export const UsersContainer = connect(mapStateToProps, {
     setCurrentPage,

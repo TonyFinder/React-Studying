@@ -15,6 +15,7 @@ import {AppStateType} from './Redux/redux-store';
 import {initializeTC} from './Redux/app_reducer';
 import {compose} from 'redux';
 import {Loading} from './components/common/Loading/Loading';
+import {getSitebar, isInitialized} from './Redux/users-selectors';
 
 type MapDispatchToPropsType = {
     initializeTC: () => void
@@ -55,8 +56,8 @@ class App extends React.Component<AppPropsType> {
 }
 
 const mapStateToProps = (state: AppStateType) => ({
-    sitebar: state.sitebar,
-    initialized: state.app.initialized
+    sitebar: getSitebar(state),
+    initialized: isInitialized(state)
 })
 
 export default compose<ComponentType>(

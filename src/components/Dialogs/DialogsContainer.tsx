@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import {AppStateType} from '../../Redux/redux-store';
 import {compose, Dispatch} from 'redux';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
+import {getDialogsPage} from '../../Redux/users-selectors';
 
 // Нужно типизировать то, что mapStateToProps возвращает
 export type MapStateToPropsType = {
@@ -15,11 +16,9 @@ export type MapDispatchToPropsType = {
 }
 export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
-    return {
-        dialogsPage: state.dialogsPage,
-    }
-}
+let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
+        dialogsPage: getDialogsPage(state),
+})
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
         addMessageHandler: (newMessage: string) => {

@@ -7,9 +7,10 @@ import {useLocation, useNavigate, useParams,} from 'react-router-dom';
 import {compose} from 'redux';
 import {Loading} from '../common/Loading/Loading';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
+import {getAuthorizedUserId, getProfile, getStatus, isFetching, isInitialized} from '../../Redux/users-selectors';
 
 type MapStateToPropsType = {
-    profilePage: ProfilePropsType
+    profile: ProfilePropsType
     isFetching: boolean
     status: string
     authorizedUserId: any
@@ -51,20 +52,18 @@ class ProfileAPI extends React.Component<ProfileMainPropsType, ProfilePropsType>
     }
     render = () => {
         if (!this.props.initialized) return <Loading/>
-        return <Profile profilePage={this.props.profilePage} isFetching={this.props.isFetching}
+        return <Profile profilePage={this.props.profile} isFetching={this.props.isFetching}
                  status={this.props.status} updateStatus={this.props.updateStatusTC}/>
     }
 }
 
-let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
-    return {
-        profilePage: state.profilePage.profile,
-        isFetching: state.profilePage.isFetching,
-        status: state.profilePage.status,
-        authorizedUserId: state.auth.id,
-        initialized: state.app.initialized
-    }
-}
+let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
+        profile: getProfile(state),
+        isFetching: isFetching(state),
+        status: getStatus(state),
+        authorizedUserId: getAuthorizedUserId(state),
+        initialized: isInitialized(state)
+})
 
 export default compose<ComponentType>(
     connect(mapStateToProps, {setProfileTC, getStatusTC, updateStatusTC}),

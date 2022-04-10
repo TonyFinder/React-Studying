@@ -6,6 +6,7 @@ import {loginTC} from '../../Redux/auth_reducer';
 import {AppStateType} from '../../Redux/redux-store';
 import {Navigate} from 'react-router-dom';
 import styles from './../common/FormControls/FormControls.module.css'
+import {getAuth} from '../../Redux/users-selectors';
 
 export type LoginFormType = {
     email: string
@@ -53,7 +54,7 @@ const LoginForm = (props: InjectedFormProps<LoginFormType>) => {
 }
 
 const mapStateToProps = (state: AppStateType) => ({
-    auth: state.auth
+    auth: getAuth(state)
 })
 
 const LoginReduxForm = reduxForm<LoginFormType>({form: 'login'})(LoginForm)
