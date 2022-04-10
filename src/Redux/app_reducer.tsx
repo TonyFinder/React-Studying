@@ -1,4 +1,4 @@
-import {AnyAction, Dispatch} from 'redux';
+import {AnyAction} from 'redux';
 import {setAuthUserTC} from './auth_reducer';
 import {ThunkDispatch} from 'redux-thunk';
 
@@ -20,7 +20,7 @@ export const initializeAC = () => ({type: 'INITIALIZE-USER'} as const)
 
 // thunks
 export const initializeTC = () => (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
-    const promise = dispatch(setAuthUserTC())
+    let promise = dispatch(setAuthUserTC())
     Promise.all([promise])
         .then(()=> {
             dispatch(initializeAC())

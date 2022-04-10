@@ -6,6 +6,7 @@ import {getStatusTC, ProfilePropsType, setProfileTC, updateStatusTC} from '../..
 import {useLocation, useNavigate, useParams,} from 'react-router-dom';
 import {compose} from 'redux';
 import {Loading} from '../common/Loading/Loading';
+import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
 type MapStateToPropsType = {
     profilePage: ProfilePropsType
@@ -25,7 +26,7 @@ type RouteType = {
 export type ProfileMainPropsType = MapStateToPropsType & MapDispatchToPropsType & RouteType
 
 // Кастомный withRouter
-function withRouter(Component: any) {
+export function withRouter(Component: any) {
     function ComponentWithRouterProp(props: any) {
         let location = useLocation();
         let navigate = useNavigate();
@@ -43,7 +44,6 @@ function withRouter(Component: any) {
 
 class ProfileAPI extends React.Component<ProfileMainPropsType, ProfilePropsType> {
     componentDidMount = () => {
-        debugger
         let userID = this.props.router.params.id
         if (!userID) userID = this.props.authorizedUserId
         this.props.setProfileTC(userID)
@@ -68,5 +68,6 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 
 export default compose<ComponentType>(
     connect(mapStateToProps, {setProfileTC, getStatusTC, updateStatusTC}),
-    withRouter
+    withRouter,
+    withAuthRedirect
 )(ProfileAPI)
